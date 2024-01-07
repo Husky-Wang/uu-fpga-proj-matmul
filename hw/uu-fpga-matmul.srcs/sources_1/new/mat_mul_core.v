@@ -1,30 +1,573 @@
 `timescale 1ns / 1ps
 
-// Pile of stinking poo
-module addr_gen # (
-
-)(
-
+// Dimension Counter
+// Saturate at top value
+module dim_counter #
+(
+    parameter integer COUNTER_BITS = $clog2(128)
+)
+(
+    input wire clk,
+    input wire anrst,
+    input wire en,
+    input wire clear,
+    input wire [COUNTER_BITS - 1 : 0] top,
+    output reg [COUNTER_BITS - 1 : 0] count,
+    output wire last
 );
+    assign last = count >= top;
+    
+    always @ (posedge (clk) or negedge (anrst)) begin
+        if (!anrst) begin
+            count <= 'b0;
+        end else begin
+            if (clear) begin
+                count <= 'b0;
+            end else if (en && !last) begin
+                count <= count + 1;
+            end 
+        end
+    end
+endmodule
 
+// Pile of stinking poo
+module addr_ctrl # (
+    parameter integer MAT_MAX_ROW = 200,
+    parameter integer MAT_MAX_COL = 69,
+
+    // Calculated Parameters
+    localparam integer MAT_MAX_ROW_BITS = $clog2(MAT_MAX_ROW),
+    localparam integer MAT_MAX_COL_BITS = $clog2(MAT_MAX_COL),
+    localparam integer MAT_MAX_SIZE = MAT_MAX_ROW * MAT_MAX_COL,
+    localparam integer MAT_MAX_SIZE_BITS = $clog2(MAT_MAX_SIZE),
+    localparam integer VECT_SIZE = MAT_MAX_ROW,
+    localparam integer VECT_SIZE_BITS = $clog2(VECT_SIZE)
+)(
+    // Clock and Reset
+    input wire clk,
+    input wire anrst,
+    
+    // AXI-Stream Slave
+    output reg in_axis_tready,
+    input wire in_axis_tvalid,
+    input wire in_axis_tlast,
+        
+    // AXI-Stream Master
+    output reg out_axis_tvalid,
+    input wire out_axis_tready,
+    output reg out_axis_tlast,
+
+    // Input Parameters
+    input wire [MAT_MAX_ROW_BITS - 1 : 0] mat_row_size,
+    input wire [MAT_MAX_COL_BITS - 1 : 0] mat_col_size,
+    
+    // Input Control Signal
+    input wire start_stb,
+
+    // Output Status Signal
+    output wire [1 : 0] err,
+    output reg finish,
+    
+    // Output Control Signal
+    output reg we_a,
+    output reg we_b,
+    output reg we_r,
+    output reg re_a,
+    output reg re_b,
+    output reg re_r,
+    output wire [MAT_MAX_SIZE_BITS - 1 : 0] addr_a,
+    output wire [VECT_SIZE_BITS - 1 : 0] addr_b,
+    output wire [VECT_SIZE_BITS - 1 : 0] addr_r,
+    output reg mac_clear
+);
+    /* Parameter Handling */
+    // Parameter Registers
+    reg [MAT_MAX_ROW_BITS - 1 : 0] mat_row_size_reg;
+    reg [MAT_MAX_COL_BITS - 1 : 0] mat_col_size_reg;
+
+    reg update_params;
+    always @ (posedge(clk) or negedge(anrst)) begin
+        if (!anrst) begin
+            mat_row_size_reg <= 'b0;
+            mat_col_size_reg <= 'b0;
+        end else begin
+            if (update_params) begin
+                mat_row_size_reg <= mat_row_size;
+                mat_col_size_reg <= mat_col_size;
+            end
+        end
+    end
+
+    // Parameter error checking
+    assign err[1] = mat_row_size_reg > MAT_MAX_ROW;
+    assign err[0] = mat_col_size_reg > MAT_MAX_COL;
+
+    /* Address Handling */
+    // Matrix A Row Counter
+    wire [MAT_MAX_ROW_BITS - 1 : 0] a_row_cnt;
+    wire a_row_cnt_last;
+    reg a_row_cnt_en, a_row_cnt_clear;
+    
+    dim_counter # (
+        .COUNTER_BITS(MAT_MAX_ROW_BITS)
+    ) a_row_counter (
+        .clk(clk),
+        .anrst(anrst),
+        .en(a_row_cnt_en),
+        .clear(a_row_cnt_clear),
+        .top(mat_row_size_reg),
+        .count(a_row_cnt),
+        .last(a_row_cnt_last)
+    );
+
+    // Matrix A Col Counter
+    wire [MAT_MAX_COL_BITS - 1 : 0] a_col_cnt;
+    wire a_col_cnt_last;
+    reg a_col_cnt_en, a_col_cnt_clear;
+
+    dim_counter # (
+        .COUNTER_BITS(MAT_MAX_COL_BITS)
+    ) a_col_counter (
+        .clk(clk),
+        .anrst(anrst),
+        .en(a_col_cnt_en),
+        .clear(a_col_cnt_clear),
+        .top(mat_col_size_reg),
+        .count(a_col_cnt),
+        .last(a_col_cnt_last)
+    );
+
+    // Vector B Counter
+    wire [VECT_SIZE_BITS - 1 : 0] b_cnt;
+    wire b_cnt_last;
+    reg b_cnt_en, b_cnt_clear;
+
+    dim_counter # (
+        .COUNTER_BITS(VECT_SIZE_BITS)
+    ) b_counter (
+        .clk(clk),
+        .anrst(anrst),
+        .en(b_cnt_en),
+        .clear(b_cnt_clear),
+        .top(mat_row_size_reg),
+        .count(b_cnt),
+        .last(b_cnt_last)
+    );
+    
+    // Vector R Counter
+    wire [VECT_SIZE_BITS - 1 : 0] r_cnt;
+    wire r_cnt_last;
+    reg r_cnt_en, r_cnt_clear;
+
+    dim_counter # (
+        .COUNTER_BITS(VECT_SIZE_BITS)
+    ) r_counter (
+        .clk(clk),
+        .anrst(anrst),
+        .en(r_cnt_en),
+        .clear(r_cnt_clear),
+        .top(mat_row_size_reg),
+        .count(r_cnt),
+        .last(r_cnt_last)
+    );
+
+    // Address generation
+    assign addr_a = a_row_cnt * mat_col_size_reg + a_col_cnt;
+    assign addr_b = b_cnt;
+    assign addr_r = r_cnt;
+
+    /* State Machine */
+    // State Machine Declaration
+    localparam integer
+        // Idle
+        FSM_IDLE      = 4'd0,
+        // Check Parameter
+        FSM_CHECK     = 4'd1,
+        // Load Data
+        FSM_INPUT_A   = 4'd2,
+        FSM_INPUT_B   = 4'd3,
+        // Do Calculation
+        FSM_CALC_PRE  = 4'd4,
+        FSM_CALC_VECT = 4'd5,
+        FSM_CALC_NEXT = 4'd6,
+        // Output Data
+        FSM_OUT_PRE   = 4'd7,
+        FSM_OUT       = 4'd8,
+        // Parameter Error
+        FSM_ERR       = 4'd9;
+    reg [3 : 0] state, next_state;
+
+    // State Machine Next State
+    always @ (posedge(clk) or negedge(anrst)) begin
+        if (!anrst) begin
+            state <= FSM_IDLE;
+        end else begin
+            state <= next_state;
+        end
+    end
+
+    // State Transitions
+    always @ (*) begin
+        case (state)
+            FSM_IDLE: begin // Idle State
+                // When start strobe is received
+                if (start_stb) begin
+                    // Transfer to FSM_CHECK
+                    next_state = FSM_CHECK;
+                end else begin
+                    // Do not transfer
+                    next_state = state;
+                end
+            end
+            FSM_CHECK: begin // Check Parameters
+                // Check if there is incorrect parameter
+                if (err != 'b0) begin
+                    // If there is incorrect parameter
+                    // Transfer to FSM_ERR
+                    next_state = FSM_ERR;
+                end else begin
+                    // If there is no incorrect parameter
+                    // Transfer to FSM_INPUT_A
+                    next_state = FSM_INPUT_A;
+                end
+            end
+            FSM_INPUT_A: begin // Load matrix A
+                // Check if matrix A is loading the last element
+                if (a_row_cnt_last && a_col_cnt_last && in_axis_tvalid) begin
+                    // Transfer to FSM_INPUT_B
+                    next_state = FSM_INPUT_B;
+                end else begin
+                    // Do not transfer
+                    next_state = state;
+                end
+            end
+            FSM_INPUT_B: begin // Load vector B
+                // Check if vector B is loading the last element
+                if (b_cnt_last && in_axis_tvalid) begin
+                    // Transfer to FSM_CALC_PRE
+                    next_state = FSM_CALC_PRE;
+                end else begin
+                    // Do not transfer
+                    next_state = state;
+                end
+            end
+            FSM_CALC_PRE: begin // Do calculation preload
+                next_state = FSM_CALC_VECT;
+            end
+            FSM_CALC_VECT: begin // Do calculation vector
+                if (b_cnt_last) begin
+                    // Transfer to FSM_CALC_PRE
+                    next_state = FSM_CALC_PRE;
+                end else begin
+                    // Do not transfer
+                    next_state = state;
+                end
+            end
+            FSM_CALC_NEXT: begin // Do calculation next vector
+                next_state = FSM_IDLE;
+            end
+            FSM_OUT_PRE: begin // Output preload vector R
+                // Transfer to FSM_OUT
+                next_state = FSM_OUT;
+            end
+            FSM_OUT: begin     // Output vector R
+                // Check if an element is being read
+                if (out_axis_tready) begin
+                    // Check if vector R is reading the last element
+                    if (r_cnt_last) begin
+                        // Transfer to FSM_IDLE
+                        next_state = FSM_IDLE;
+                    end else begin
+                        // Transfer to FSM_OUT_PRE
+                        next_state = FSM_OUT_PRE;
+                    end
+                end else begin
+                    // Do not transfer
+                    next_state = state;
+                end
+                
+            end
+            FSM_ERR: begin        // Parameter Error
+                // Check if an element is being read as a dummy
+                if (out_axis_tready) begin
+                    // Transfer to FSM_IDLE
+                    next_state = FSM_IDLE;
+                end else begin
+                    // Do not transfer
+                    next_state = state;
+                end
+            end
+            default: begin              // Invalid State
+                next_state = FSM_IDLE;
+            end
+        endcase
+    end
+
+    // State Machine Combinational Output Logic
+    always @ (*) begin
+        case (state)
+            FSM_IDLE: begin       // Idle State
+                in_axis_tready = 1'b0;
+                out_axis_tvalid = 1'b0;
+                out_axis_tlast = 1'b0;
+                finish = 1'b0;
+                we_a = 1'b0;
+                we_b = 1'b0;
+                we_r = 1'b0;
+                re_a = 1'b0;
+                re_b = 1'b0;
+                re_r = 1'b0;
+                mac_clear = 1'b1;
+                update_params = start_stb;
+                a_row_cnt_en = 1'b0;
+                a_row_cnt_clear = 1'b1;
+                a_col_cnt_en = 1'b0;
+                a_col_cnt_clear = 1'b1;
+                b_cnt_en = 1'b0;
+                b_cnt_clear = 1'b1;
+                r_cnt_en = 1'b0;
+                r_cnt_clear = 1'b1;
+            end
+            FSM_CHECK: begin      // Check Parameters
+                in_axis_tready = 1'b0;
+                out_axis_tvalid = 1'b0;
+                out_axis_tlast = 1'b0;
+                finish = 1'b0;
+                we_a = 1'b0;
+                we_b = 1'b0;
+                we_r = 1'b0;
+                re_a = 1'b0;
+                re_b = 1'b0;
+                re_r = 1'b0;
+                mac_clear = 1'b1;
+                update_params = 1'b0;
+                a_row_cnt_en = 1'b0;
+                a_row_cnt_clear = 1'b1;
+                a_col_cnt_en = 1'b0;
+                a_col_cnt_clear = 1'b1;
+                b_cnt_en = 1'b0;
+                b_cnt_clear = 1'b1;
+                r_cnt_en = 1'b0;
+                r_cnt_clear = 1'b1;
+            end
+            FSM_INPUT_A: begin    // Load matrix A
+                in_axis_tready = 1'b1;
+                out_axis_tvalid = 1'b0;
+                out_axis_tlast = 1'b0;
+                finish = 1'b0;
+                we_a = in_axis_tvalid;
+                we_b = 1'b0;
+                we_r = 1'b0;
+                re_a = 1'b0;
+                re_b = 1'b0;
+                re_r = 1'b0;
+                mac_clear = 1'b1;
+                update_params = 1'b0;
+                a_row_cnt_en = in_axis_tvalid && !a_row_cnt_last && a_col_cnt_last;
+                a_row_cnt_clear = in_axis_tvalid && a_row_cnt_last && a_col_cnt_last;
+                a_col_cnt_en = in_axis_tvalid && !a_col_cnt_last;
+                a_col_cnt_clear = in_axis_tvalid && a_col_cnt_last;
+                b_cnt_en = 1'b0;
+                b_cnt_clear = 1'b1;
+                r_cnt_en = 1'b0;
+                r_cnt_clear = 1'b1;
+            end
+            FSM_INPUT_B: begin    // Load vector B
+                in_axis_tready = 1'b1;
+                out_axis_tvalid = 1'b0;
+                out_axis_tlast = 1'b0;
+                finish = 1'b0;
+                we_a = 1'b0;
+                we_b = in_axis_tvalid;
+                we_r = 1'b0;
+                re_a = 1'b0;
+                re_b = 1'b0;
+                re_r = 1'b0;
+                mac_clear = 1'b1;
+                update_params = 1'b0;
+                a_row_cnt_en = 1'b0;
+                a_row_cnt_clear = 1'b1;
+                a_col_cnt_en = 1'b0;
+                a_col_cnt_clear = 1'b1;
+                b_cnt_en = in_axis_tvalid;
+                b_cnt_clear = 1'b0;
+                r_cnt_en = 1'b0;
+                r_cnt_clear = 1'b1;
+            end
+            FSM_CALC_PRE: begin // Do calculation preload
+                in_axis_tready = 1'b0;
+                out_axis_tvalid = 1'b0;
+                out_axis_tlast = 1'b0;
+                finish = 1'b0;
+                we_a = 1'b0;
+                we_b = 1'b0;
+                we_r = 1'b0;
+                re_a = 1'b1;
+                re_b = 1'b1;
+                re_r = 1'b0;
+                mac_clear = 1'b1;
+                update_params = 1'b0;
+                a_row_cnt_en = 1'b0;
+                a_row_cnt_clear = 1'b0;
+                a_col_cnt_en = 1'b1;
+                a_col_cnt_clear = 1'b0;
+                b_cnt_en = 1'b1;
+                b_cnt_clear = 1'b0;
+                r_cnt_en = 1'b0;
+                r_cnt_clear = 1'b0;
+            end
+            FSM_CALC_VECT: begin // Do calculation vector
+                in_axis_tready = 1'b0;
+                out_axis_tvalid = 1'b0;
+                out_axis_tlast = 1'b0;
+                finish = 1'b0;
+                we_a = 1'b0;
+                we_b = 1'b0;
+                we_r = b_cnt_last;
+                re_a = 1'b1;
+                re_b = 1'b1;
+                re_r = 1'b0;
+                mac_clear = b_cnt_last;
+                update_params = 1'b0;
+                a_row_cnt_en = b_cnt_last;
+                a_row_cnt_clear = 1'b0;
+                a_col_cnt_en = b_cnt_last;
+                a_col_cnt_clear = 1'b1;
+                b_cnt_en = !b_cnt_last;
+                b_cnt_clear = b_cnt_last;
+                r_cnt_en = b_cnt_last;
+                r_cnt_clear = 1'b0;
+            end
+            FSM_CALC_NEXT: begin // Do calculation next vector
+                in_axis_tready = 1'b0;
+                out_axis_tvalid = 1'b0;
+                out_axis_tlast = 1'b0;
+                finish = 1'b0;
+                we_a = 1'b0;
+                we_b = 1'b0;
+                we_r = 1'b0;
+                re_a = 1'b0;
+                re_b = 1'b0;
+                re_r = 1'b0;
+                mac_clear = 1'b1;
+                update_params = 1'b0;
+                a_row_cnt_en = 1'b0;
+                a_row_cnt_clear = 1'b1;
+                a_col_cnt_en = 1'b0;
+                a_col_cnt_clear = 1'b1;
+                b_cnt_en = 1'b0;
+                b_cnt_clear = 1'b1;
+                r_cnt_en = 1'b0;
+                r_cnt_clear = 1'b1;
+            end
+            FSM_OUT_PRE: begin // Output preload vector R
+                in_axis_tready = 1'b0;
+                out_axis_tvalid = 1'b0;
+                out_axis_tlast = 1'b0;
+                finish = 1'b1;
+                we_a = 1'b0;
+                we_b = 1'b0;
+                we_r = 1'b0;
+                re_a = 1'b0;
+                re_b = 1'b0;
+                re_r = 1'b1;
+                mac_clear = 1'b1;
+                update_params = 1'b0;
+                a_row_cnt_en = 1'b0;
+                a_row_cnt_clear = 1'b1;
+                a_col_cnt_en = 1'b0;
+                a_col_cnt_clear = 1'b1;
+                b_cnt_en = 1'b0;
+                b_cnt_clear = 1'b1;
+                r_cnt_en = 1'b0;
+                r_cnt_clear = 1'b0;
+            end
+            FSM_OUT: begin // Output vector R
+                in_axis_tready = 1'b0;
+                out_axis_tvalid = 1'b1;
+                out_axis_tlast = r_cnt_last;
+                finish = 1'b1;
+                we_a = 1'b0;
+                we_b = 1'b0;
+                we_r = 1'b0;
+                re_a = 1'b0;
+                re_b = 1'b0;
+                re_r = 1'b1;
+                mac_clear = 1'b1;
+                update_params = 1'b0;
+                a_row_cnt_en = 1'b0;
+                a_row_cnt_clear = 1'b1;
+                a_col_cnt_en = 1'b0;
+                a_col_cnt_clear = 1'b1;
+                b_cnt_en = 1'b0;
+                b_cnt_clear = 1'b1;
+                r_cnt_en = out_axis_tready;
+                r_cnt_clear = 1'b0;
+            end
+            FSM_ERR: begin // Parameter Error
+                in_axis_tready = 1'b0;
+                out_axis_tvalid = 1'b1;
+                out_axis_tlast = 1'b1;
+                finish = 1'b1;
+                we_a = 1'b0;
+                we_b = 1'b0;
+                we_r = 1'b0;
+                re_a = 1'b0;
+                re_b = 1'b0;
+                re_r = 1'b0;
+                mac_clear = 1'b1;
+                update_params = 1'b0;
+                a_row_cnt_en = 1'b0;
+                a_row_cnt_clear = 1'b1;
+                a_col_cnt_en = 1'b0;
+                a_col_cnt_clear = 1'b1;
+                b_cnt_en = 1'b0;
+                b_cnt_clear = 1'b1;
+                r_cnt_en = 1'b0;
+                r_cnt_clear = 1'b1;
+            end
+            default: begin // Invalid State
+                in_axis_tready = 1'b0;
+                out_axis_tvalid = 1'b0;
+                out_axis_tlast = 1'b0;
+                finish = 1'b0;
+                we_a = 1'b0;
+                we_b = 1'b0;
+                we_r = 1'b0;
+                re_a = 1'b0;
+                re_b = 1'b0;
+                re_r = 1'b0;
+                mac_clear = 1'b1;
+                update_params = 1'b0;
+                a_row_cnt_en = 1'b0;
+                a_row_cnt_clear = 1'b1;
+                a_col_cnt_en = 1'b0;
+                a_col_cnt_clear = 1'b1;
+                b_cnt_en = 1'b0;
+                b_cnt_clear = 1'b1;
+                r_cnt_en = 1'b0;
+                r_cnt_clear = 1'b1;
+            end
+        endcase
+    end
 endmodule
 
 // General-purpose simple dual-port BRAM
-// With support for asymmetric read/write data width
+// With optional support for asymmetric read/write data width
 module bram # (
-    parameter integer WORD_WIDTH = 16,
-    parameter integer W_DATA_WIDTH_WORDS = 4,
-    parameter integer R_DATA_WIDTH_WORDS = 8,
+    parameter integer WORD_WIDTH = 32,
+    parameter integer W_WORD_WIDTH_WORDS = 2,
+    parameter integer R_WORD_WIDTH_WORDS = 1,
     parameter integer MEM_SIZE_WORDS = 1024,
     
     // Calculated Parameters
-    localparam integer W_ADDR_SIZE = MEM_SIZE_WORDS / W_DATA_WIDTH_WORDS,
+    localparam integer W_ADDR_SIZE = MEM_SIZE_WORDS / W_WORD_WIDTH_WORDS,
     localparam integer W_ADDR_BITS = $clog2(W_ADDR_SIZE),
-    localparam integer W_DATA_BITS = WORD_WIDTH * W_DATA_WIDTH_WORDS,
+    localparam integer W_DATA_BITS = WORD_WIDTH * W_WORD_WIDTH_WORDS,
     
-    localparam integer R_ADDR_SIZE = MEM_SIZE_WORDS / R_DATA_WIDTH_WORDS,
+    localparam integer R_ADDR_SIZE = MEM_SIZE_WORDS / R_WORD_WIDTH_WORDS,
     localparam integer R_ADDR_BITS = $clog2(R_ADDR_SIZE),
-    localparam integer R_DATA_BITS = WORD_WIDTH * R_DATA_WIDTH_WORDS
+    localparam integer R_DATA_BITS = WORD_WIDTH * R_WORD_WIDTH_WORDS
 )(
     // Clock and Reset
     input wire clk,
@@ -109,12 +652,11 @@ module bram # (
     
 endmodule
 
-// Pipelined MAC Module
-// With support for multiple MAC instances
+// Multiply-And-Accumulate Core
+// Support for fixed point arithmatic
 module alu_mac # (
-    parameter integer DATA_WIDTH = 16,
-    parameter integer MAC_INST = 8,
-    parameter integer PIPELINE_STAGES = 10
+    parameter integer WORD_WIDTH = 32,
+    parameter integer FRACTIONAL_BITS = 24
 )(
     // Clock and Reset
     input wire clk,
@@ -122,57 +664,25 @@ module alu_mac # (
     // Clear Signal
     input wire clear,
     // Data I/O
-    input wire [DATA_WIDTH * MAC_INST - 1 : 0] in_a,
-    input wire [DATA_WIDTH * MAC_INST - 1 : 0] in_b,
-    output wire [DATA_WIDTH - 1 : 0] out
+    input wire [WORD_WIDTH - 1 : 0] in_a,
+    input wire [WORD_WIDTH - 1 : 0] in_b,
+    output wire [WORD_WIDTH - 1 : 0] out
 );
-    reg signed [2 * DATA_WIDTH * MAC_INST - 1 : 0] mac_inst_result;
-    reg signed [DATA_WIDTH - 1 : 0] mac_result [PIPELINE_STAGES : 0];
+    reg [WORD_WIDTH - 1 : 0] reg_add;
 
-    always @ (posedge(clk) or negedge(anrst)) begin : mac_instances
-        integer i;
-        
+    always @ (posedge (clk) or negedge(anrst)) begin
         if (!anrst) begin
-            mac_inst_result <= 'b0;
+            reg_add <= 'b0;
         end else begin
             if (clear) begin
-                mac_inst_result <= 'b0;
+                reg_add <= 'b0;
             end else begin
-                for (i = 0; i < MAC_INST; i = i + 1) begin
-                    mac_inst_result[i * 2 * DATA_WIDTH +: 2 * DATA_WIDTH] <=
-                        in_a[i * DATA_WIDTH +: DATA_WIDTH] *
-                        in_b[i * DATA_WIDTH +: DATA_WIDTH] +
-                        mac_inst_result[i * 2 * DATA_WIDTH +: 2 * DATA_WIDTH];
-                end
+                reg_add <= out;
             end
         end
     end
 
-    always @ * begin : mac_aggregator
-        integer i;
-
-        mac_result[0] = 'b0;
-        for (i = 0; i < MAC_INST; i = i + 1) begin
-            mac_result[0] =
-                mac_result[0] +
-                mac_inst_result[i * 2 * DATA_WIDTH +: 2 * DATA_WIDTH];
-        end
-    end
-
-    always @ (posedge(clk) or negedge(anrst)) begin : mac_pipeline
-        integer i;
-
-        if (!anrst) begin
-            for (i = 1; i <= PIPELINE_STAGES; i = i + 1) begin
-                mac_result[i] <= 'b0;
-            end
-        end else begin
-            for (i = 1; i <= PIPELINE_STAGES; i = i + 1) begin
-                mac_result[i] <= mac_result[i - 1];
-            end
-        end
-    end
-
-    assign out = mac_result[PIPELINE_STAGES];
-
+    // Shift multiplication result by FRACTIONAL_BITS
+    wire [WORD_WIDTH * 2 - 1 : 0] mul_result = in_a * in_b;
+    assign out = reg_add + mul_result[FRACTIONAL_BITS +: WORD_WIDTH];
 endmodule
