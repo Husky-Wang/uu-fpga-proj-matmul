@@ -1,42 +1,8 @@
 `timescale 1ns / 1ps
 
-// Edge Detector
-module edge_det #(
-    parameter FALLING = 1'b1
-)(
-    input wire anrst,
-    input wire clk,
-    input wire in_sig,
-    output wire out_stb
-);
-    reg det_reg;
-    
-    generate
-        if (FALLING) begin
-            assign out_stb = ~in_sig & det_reg;
-        end else begin
-            assign out_stb = in_sig & ~det_reg;
-        end
-    endgenerate
-
-    always @ (posedge(clk) or negedge(anrst)) begin
-        if (!anrst) begin
-            det_reg <= FALLING;
-        end else begin
-            det_reg <= in_sig;
-        end
-    end
-endmodule
-
 // Why do I hate myself
 module axis_ctrl_if # (
-    parameter integer AXIS_DATA_WIDTH = 32,
-    parameter integer MAT_MAX_ROW = 200,
-    parameter integer MAT_MAX_COL = 69,
-    
-    // Calculated Parameters
-    localparam integer MAT_MAX_ROW_BITS = $clog2(MAT_MAX_ROW),
-    localparam integer MAT_MAX_COL_BITS = $clog2(MAT_MAX_COL)
+    parameter integer AXIS_DATA_WIDTH = 32
 )(
     // Clock and Reset
     input wire clk,
@@ -49,14 +15,14 @@ module axis_ctrl_if # (
     input wire [AXIS_DATA_WIDTH - 1 : 0] ctrl_axis_tdata,
         
     // AXI-Stream Status Interface
-    output reg stat_axis_tvalid,
     input wire stat_axis_tready,
+    output reg stat_axis_tvalid,
     output wire stat_axis_tlast,
     output reg [AXIS_DATA_WIDTH - 1 : 0] stat_axis_tdata,
 
     // Parameters
-    output wire [MAT_MAX_ROW_BITS - 1 : 0] mat_row_size,
-    output wire [MAT_MAX_COL_BITS - 1 : 0] mat_col_size,
+    output wire [AXIS_DATA_WIDTH - 1 : 0] mat_row_size,
+    output wire [AXIS_DATA_WIDTH - 1 : 0] mat_col_size,
     
     // Control Signal
     output reg start_stb,
@@ -80,8 +46,8 @@ module axis_ctrl_if # (
         end
     end
 
-    assign mat_row_size = app_data[1][MAT_MAX_ROW_BITS - 1 : 0];
-    assign mat_col_size = app_data[0][MAT_MAX_COL_BITS - 1 : 0];
+    assign mat_row_size = app_data[1];
+    assign mat_col_size = app_data[0];
 
     /* Handle Status Output Counting */
     reg [2 : 0] stat_cnt;
@@ -242,7 +208,7 @@ module axis_ctrl_if # (
                 start_stb = 1'b0;
                 update_params = 1'b0;
                 update_err = 1'b0;
-                stat_cnt_en = 1'b1;
+                stat_cnt_en = stat_axis_tready;
                 stat_cnt_clear = 1'b0;
             end
             FSM_WAIT: begin
@@ -273,9 +239,9 @@ module mat_mul # (
     parameter integer PAYLOAD_AXIS_DATA_WIDTH = 32,
 
     parameter integer WORD_WIDTH = 32,
-    parameter integer FRACTIONAL_BITS = 24,
-    parameter integer MAT_MAX_ROW = 200,
-    parameter integer MAT_MAX_COL = 69
+    parameter integer FRAC_BITS = 0,
+    parameter integer MAT_MAX_ROW = 64,
+    parameter integer MAT_MAX_COL = 128
 )(
     // Clock and Reset
     input wire clk,
@@ -288,8 +254,8 @@ module mat_mul # (
     input wire [CTRL_STAT_AXIS_DATA_WIDTH - 1 : 0] ctrl_axis_tdata,
         
     // AXI-Stream Status Interface
-    output wire stat_axis_tvalid,
     input wire stat_axis_tready,
+    output wire stat_axis_tvalid,
     output wire stat_axis_tlast,
     output wire [CTRL_STAT_AXIS_DATA_WIDTH - 1 : 0] stat_axis_tdata,
 
@@ -300,17 +266,18 @@ module mat_mul # (
     input wire [PAYLOAD_AXIS_DATA_WIDTH - 1 : 0] in_axis_tdata,
         
     // AXI-Stream Master Payload Interface
-    output wire out_axis_tvalid,
     input wire out_axis_tready,
+    output wire out_axis_tvalid,
     output wire out_axis_tlast,
     output wire [PAYLOAD_AXIS_DATA_WIDTH - 1 : 0] out_axis_tdata
 );
 
-    wire [$clog2(MAT_MAX_ROW) - 1 : 0] mat_row_size;
-    wire [$clog2(MAT_MAX_COL) - 1 : 0] mat_col_size;
+    wire [CTRL_STAT_AXIS_DATA_WIDTH - 1 : 0] mat_row_size;
+    wire [CTRL_STAT_AXIS_DATA_WIDTH - 1 : 0] mat_col_size;
     wire [1 : 0] err;
     wire [$clog2(MAT_MAX_ROW * MAT_MAX_COL) - 1 : 0] addr_a;
-    wire [$clog2(MAT_MAX_ROW) - 1 : 0] addr_b, addr_r;
+    wire [$clog2(MAT_MAX_COL) - 1 : 0] addr_b;
+    wire [$clog2(MAT_MAX_ROW) - 1 : 0] addr_r;
     wire [WORD_WIDTH - 1 : 0] data_a, data_b, data_r;
     wire start_stb, finish,
         we_a, we_b, we_r,
@@ -318,9 +285,7 @@ module mat_mul # (
         mac_clear;
 
     axis_ctrl_if # (
-        .AXIS_DATA_WIDTH(CTRL_STAT_AXIS_DATA_WIDTH),
-        .MAT_MAX_ROW(MAT_MAX_ROW),
-        .MAT_MAX_COL(MAT_MAX_COL)
+        .AXIS_DATA_WIDTH(CTRL_STAT_AXIS_DATA_WIDTH)
     ) axis_ctrl_inst (
         .clk(clk),
         .anrst(anrst),
@@ -328,8 +293,8 @@ module mat_mul # (
         .ctrl_axis_tvalid(ctrl_axis_tvalid),
         .ctrl_axis_tlast(ctrl_axis_tlast),
         .ctrl_axis_tdata(ctrl_axis_tdata),
-        .stat_axis_tvalid(stat_axis_tvalid),
         .stat_axis_tready(stat_axis_tready),
+        .stat_axis_tvalid(stat_axis_tvalid),
         .stat_axis_tlast(stat_axis_tlast),
         .stat_axis_tdata(stat_axis_tdata),
         .mat_row_size(mat_row_size),
@@ -348,8 +313,8 @@ module mat_mul # (
         .in_axis_tready(in_axis_tready),
         .in_axis_tvalid(in_axis_tvalid),
         .in_axis_tlast(in_axis_tlast),
-        .out_axis_tvalid(out_axis_tvalid),
         .out_axis_tready(out_axis_tready),
+        .out_axis_tvalid(out_axis_tvalid),
         .out_axis_tlast(out_axis_tlast),
         .mat_row_size(mat_row_size),
         .mat_col_size(mat_col_size),
@@ -370,7 +335,7 @@ module mat_mul # (
 
     alu_mac # (
         .WORD_WIDTH(WORD_WIDTH),
-        .FRACTIONAL_BITS(FRACTIONAL_BITS)
+        .FRAC_BITS(FRAC_BITS)
     ) alu_mac_inst (
         .clk(clk),
         .anrst(anrst),
@@ -399,7 +364,7 @@ module mat_mul # (
         .WORD_WIDTH(WORD_WIDTH),
         .W_WORD_WIDTH_WORDS(1),
         .R_WORD_WIDTH_WORDS(1),
-        .MEM_SIZE_WORDS(MAT_MAX_ROW)
+        .MEM_SIZE_WORDS(MAT_MAX_COL)
     ) bram_b (
         .clk(clk),
         .w_addr(addr_b),

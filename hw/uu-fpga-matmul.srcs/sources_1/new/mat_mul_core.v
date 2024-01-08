@@ -32,16 +32,19 @@ endmodule
 
 // Pile of stinking poo
 module addr_ctrl # (
-    parameter integer MAT_MAX_ROW = 200,
-    parameter integer MAT_MAX_COL = 69,
+    parameter integer MAT_MAX_ROW = 64,
+    parameter integer MAT_MAX_COL = 128,
+    parameter integer PARAM_DATA_WIDTH = 32,
 
     // Calculated Parameters
     localparam integer MAT_MAX_ROW_BITS = $clog2(MAT_MAX_ROW),
     localparam integer MAT_MAX_COL_BITS = $clog2(MAT_MAX_COL),
     localparam integer MAT_MAX_SIZE = MAT_MAX_ROW * MAT_MAX_COL,
     localparam integer MAT_MAX_SIZE_BITS = $clog2(MAT_MAX_SIZE),
-    localparam integer VECT_SIZE = MAT_MAX_ROW,
-    localparam integer VECT_SIZE_BITS = $clog2(VECT_SIZE)
+    localparam integer VECT_B_SIZE = MAT_MAX_COL,
+    localparam integer VECT_B_SIZE_BITS = $clog2(VECT_B_SIZE),
+    localparam integer VECT_R_SIZE = MAT_MAX_ROW,
+    localparam integer VECT_R_SIZE_BITS = $clog2(VECT_R_SIZE)
 )(
     // Clock and Reset
     input wire clk,
@@ -53,13 +56,13 @@ module addr_ctrl # (
     input wire in_axis_tlast,
         
     // AXI-Stream Master
-    output reg out_axis_tvalid,
     input wire out_axis_tready,
+    output reg out_axis_tvalid,
     output reg out_axis_tlast,
 
     // Input Parameters
-    input wire [MAT_MAX_ROW_BITS - 1 : 0] mat_row_size,
-    input wire [MAT_MAX_COL_BITS - 1 : 0] mat_col_size,
+    input wire [PARAM_DATA_WIDTH - 1 : 0] mat_row_size,
+    input wire [PARAM_DATA_WIDTH - 1 : 0] mat_col_size,
     
     // Input Control Signal
     input wire start_stb,
@@ -76,14 +79,14 @@ module addr_ctrl # (
     output reg re_b,
     output reg re_r,
     output wire [MAT_MAX_SIZE_BITS - 1 : 0] addr_a,
-    output wire [VECT_SIZE_BITS - 1 : 0] addr_b,
-    output wire [VECT_SIZE_BITS - 1 : 0] addr_r,
+    output wire [VECT_B_SIZE_BITS - 1 : 0] addr_b,
+    output wire [VECT_R_SIZE_BITS - 1 : 0] addr_r,
     output reg mac_clear
 );
     /* Parameter Handling */
     // Parameter Registers
-    reg [MAT_MAX_ROW_BITS - 1 : 0] mat_row_size_reg;
-    reg [MAT_MAX_COL_BITS - 1 : 0] mat_col_size_reg;
+    reg [PARAM_DATA_WIDTH - 1 : 0] mat_row_size_reg;
+    reg [PARAM_DATA_WIDTH - 1 : 0] mat_col_size_reg;
 
     reg update_params;
     always @ (posedge(clk) or negedge(anrst)) begin
@@ -99,11 +102,12 @@ module addr_ctrl # (
     end
 
     // Parameter error checking
-    assign err[1] = mat_row_size_reg > MAT_MAX_ROW;
-    assign err[0] = mat_col_size_reg > MAT_MAX_COL;
+    assign err[1] = mat_row_size_reg <= 0 || mat_row_size_reg > MAT_MAX_ROW;
+    assign err[0] = mat_row_size_reg <= 0 || mat_col_size_reg > MAT_MAX_COL;
 
     /* Address Handling */
     // Matrix A Row Counter
+    wire [MAT_MAX_ROW_BITS - 1 : 0] a_row_cnt_top;
     wire [MAT_MAX_ROW_BITS - 1 : 0] a_row_cnt;
     wire a_row_cnt_last;
     reg a_row_cnt_en, a_row_cnt_clear;
@@ -115,7 +119,7 @@ module addr_ctrl # (
         .anrst(anrst),
         .en(a_row_cnt_en),
         .clear(a_row_cnt_clear),
-        .top(mat_row_size_reg),
+        .top(mat_row_size_reg - 1),
         .count(a_row_cnt),
         .last(a_row_cnt_last)
     );
@@ -132,41 +136,41 @@ module addr_ctrl # (
         .anrst(anrst),
         .en(a_col_cnt_en),
         .clear(a_col_cnt_clear),
-        .top(mat_col_size_reg),
+        .top(mat_col_size_reg - 1),
         .count(a_col_cnt),
         .last(a_col_cnt_last)
     );
 
     // Vector B Counter
-    wire [VECT_SIZE_BITS - 1 : 0] b_cnt;
+    wire [VECT_B_SIZE_BITS - 1 : 0] b_cnt;
     wire b_cnt_last;
     reg b_cnt_en, b_cnt_clear;
 
     dim_counter # (
-        .COUNTER_BITS(VECT_SIZE_BITS)
+        .COUNTER_BITS(VECT_B_SIZE_BITS)
     ) b_counter (
         .clk(clk),
         .anrst(anrst),
         .en(b_cnt_en),
         .clear(b_cnt_clear),
-        .top(mat_row_size_reg),
+        .top(mat_col_size_reg - 1),
         .count(b_cnt),
         .last(b_cnt_last)
     );
     
     // Vector R Counter
-    wire [VECT_SIZE_BITS - 1 : 0] r_cnt;
+    wire [VECT_R_SIZE_BITS - 1 : 0] r_cnt;
     wire r_cnt_last;
     reg r_cnt_en, r_cnt_clear;
 
     dim_counter # (
-        .COUNTER_BITS(VECT_SIZE_BITS)
+        .COUNTER_BITS(VECT_R_SIZE_BITS)
     ) r_counter (
         .clk(clk),
         .anrst(anrst),
         .en(r_cnt_en),
         .clear(r_cnt_clear),
-        .top(mat_row_size_reg),
+        .top(mat_row_size_reg - 1),
         .count(r_cnt),
         .last(r_cnt_last)
     );
@@ -252,19 +256,28 @@ module addr_ctrl # (
                 end
             end
             FSM_CALC_PRE: begin // Do calculation preload
+                // Transfer to FSM_CALC_VECT
                 next_state = FSM_CALC_VECT;
             end
-            FSM_CALC_VECT: begin // Do calculation vector
+            FSM_CALC_VECT: begin // Do calculation current vector
+                // Check if on last element of current vector
                 if (b_cnt_last) begin
-                    // Transfer to FSM_CALC_PRE
-                    next_state = FSM_CALC_PRE;
+                    // Transfer to FSM_CALC_NEXT
+                    next_state = FSM_CALC_NEXT;
                 end else begin
                     // Do not transfer
                     next_state = state;
                 end
             end
-            FSM_CALC_NEXT: begin // Do calculation next vector
-                next_state = FSM_IDLE;
+            FSM_CALC_NEXT: begin //Do calculation goto next vector
+                // Check if on last element of everything
+                if (a_row_cnt_last && a_col_cnt_last) begin
+                    // Transfer to FSM_OUT_PRE
+                    next_state = FSM_OUT_PRE;
+                end else begin
+                    // Transfer to FSM_CALC_PRE
+                    next_state = FSM_CALC_PRE;
+                end
             end
             FSM_OUT_PRE: begin // Output preload vector R
                 // Transfer to FSM_OUT
@@ -363,9 +376,9 @@ module addr_ctrl # (
                 re_r = 1'b0;
                 mac_clear = 1'b1;
                 update_params = 1'b0;
-                a_row_cnt_en = in_axis_tvalid && !a_row_cnt_last && a_col_cnt_last;
+                a_row_cnt_en = in_axis_tvalid &&/* !a_row_cnt_last && */a_col_cnt_last;
                 a_row_cnt_clear = in_axis_tvalid && a_row_cnt_last && a_col_cnt_last;
-                a_col_cnt_en = in_axis_tvalid && !a_col_cnt_last;
+                a_col_cnt_en = in_axis_tvalid /*&& !a_col_cnt_last*/;
                 a_col_cnt_clear = in_axis_tvalid && a_col_cnt_last;
                 b_cnt_en = 1'b0;
                 b_cnt_clear = 1'b1;
@@ -389,8 +402,8 @@ module addr_ctrl # (
                 a_row_cnt_clear = 1'b1;
                 a_col_cnt_en = 1'b0;
                 a_col_cnt_clear = 1'b1;
-                b_cnt_en = in_axis_tvalid;
-                b_cnt_clear = 1'b0;
+                b_cnt_en = in_axis_tvalid/* && !b_cnt_last*/;
+                b_cnt_clear = in_axis_tvalid && b_cnt_last;
                 r_cnt_en = 1'b0;
                 r_cnt_clear = 1'b1;
             end
@@ -402,8 +415,8 @@ module addr_ctrl # (
                 we_a = 1'b0;
                 we_b = 1'b0;
                 we_r = 1'b0;
-                re_a = 1'b1;
-                re_b = 1'b1;
+                re_a = 1'b0;
+                re_b = 1'b0;
                 re_r = 1'b0;
                 mac_clear = 1'b1;
                 update_params = 1'b0;
@@ -416,29 +429,7 @@ module addr_ctrl # (
                 r_cnt_en = 1'b0;
                 r_cnt_clear = 1'b0;
             end
-            FSM_CALC_VECT: begin // Do calculation vector
-                in_axis_tready = 1'b0;
-                out_axis_tvalid = 1'b0;
-                out_axis_tlast = 1'b0;
-                finish = 1'b0;
-                we_a = 1'b0;
-                we_b = 1'b0;
-                we_r = b_cnt_last;
-                re_a = 1'b1;
-                re_b = 1'b1;
-                re_r = 1'b0;
-                mac_clear = b_cnt_last;
-                update_params = 1'b0;
-                a_row_cnt_en = b_cnt_last;
-                a_row_cnt_clear = 1'b0;
-                a_col_cnt_en = b_cnt_last;
-                a_col_cnt_clear = 1'b1;
-                b_cnt_en = !b_cnt_last;
-                b_cnt_clear = b_cnt_last;
-                r_cnt_en = b_cnt_last;
-                r_cnt_clear = 1'b0;
-            end
-            FSM_CALC_NEXT: begin // Do calculation next vector
+            FSM_CALC_VECT: begin // Do calculation current vector
                 in_axis_tready = 1'b0;
                 out_axis_tvalid = 1'b0;
                 out_axis_tlast = 1'b0;
@@ -446,19 +437,41 @@ module addr_ctrl # (
                 we_a = 1'b0;
                 we_b = 1'b0;
                 we_r = 1'b0;
-                re_a = 1'b0;
-                re_b = 1'b0;
+                re_a = 1'b1;
+                re_b = 1'b1;
+                re_r = 1'b0;
+                mac_clear = 1'b0;
+                update_params = 1'b0;
+                a_row_cnt_en = 1'b0;
+                a_row_cnt_clear = 1'b0;
+                a_col_cnt_en = 1'b1;
+                a_col_cnt_clear = 1'b0;
+                b_cnt_en = 1'b1;
+                b_cnt_clear = 1'b0;
+                r_cnt_en = 1'b0;
+                r_cnt_clear = 1'b0;
+            end
+            FSM_CALC_NEXT: begin // Do calculation goto next vector
+                in_axis_tready = 1'b0;
+                out_axis_tvalid = 1'b0;
+                out_axis_tlast = 1'b0;
+                finish = 1'b0;
+                we_a = 1'b0;
+                we_b = 1'b0;
+                we_r = 1'b1;
+                re_a = 1'b1;
+                re_b = 1'b1;
                 re_r = 1'b0;
                 mac_clear = 1'b1;
                 update_params = 1'b0;
-                a_row_cnt_en = 1'b0;
-                a_row_cnt_clear = 1'b1;
+                a_row_cnt_en = 1'b1;
+                a_row_cnt_clear = a_row_cnt_last;
                 a_col_cnt_en = 1'b0;
                 a_col_cnt_clear = 1'b1;
                 b_cnt_en = 1'b0;
                 b_cnt_clear = 1'b1;
-                r_cnt_en = 1'b0;
-                r_cnt_clear = 1'b1;
+                r_cnt_en = 1'b1;
+                r_cnt_clear = a_row_cnt_last;
             end
             FSM_OUT_PRE: begin // Output preload vector R
                 in_axis_tready = 1'b0;
@@ -470,7 +483,7 @@ module addr_ctrl # (
                 we_r = 1'b0;
                 re_a = 1'b0;
                 re_b = 1'b0;
-                re_r = 1'b1;
+                re_r = 1'b0;
                 mac_clear = 1'b1;
                 update_params = 1'b0;
                 a_row_cnt_en = 1'b0;
@@ -504,7 +517,7 @@ module addr_ctrl # (
                 r_cnt_en = out_axis_tready;
                 r_cnt_clear = 1'b0;
             end
-            FSM_ERR: begin // Parameter Error
+            FSM_ERR: begin // Parameter Error   ### NOT WORKING, SO TRY NOT TO MAKE MISTAKES
                 in_axis_tready = 1'b0;
                 out_axis_tvalid = 1'b1;
                 out_axis_tlast = 1'b1;
@@ -556,9 +569,9 @@ endmodule
 // With optional support for asymmetric read/write data width
 module bram # (
     parameter integer WORD_WIDTH = 32,
-    parameter integer W_WORD_WIDTH_WORDS = 2,
+    parameter integer W_WORD_WIDTH_WORDS = 1,
     parameter integer R_WORD_WIDTH_WORDS = 1,
-    parameter integer MEM_SIZE_WORDS = 1024,
+    parameter integer MEM_SIZE_WORDS = 128,
     
     // Calculated Parameters
     localparam integer W_ADDR_SIZE = MEM_SIZE_WORDS / W_WORD_WIDTH_WORDS,
@@ -656,7 +669,7 @@ endmodule
 // Support for fixed point arithmatic
 module alu_mac # (
     parameter integer WORD_WIDTH = 32,
-    parameter integer FRACTIONAL_BITS = 24
+    parameter integer FRAC_BITS = 0
 )(
     // Clock and Reset
     input wire clk,
@@ -664,11 +677,11 @@ module alu_mac # (
     // Clear Signal
     input wire clear,
     // Data I/O
-    input wire [WORD_WIDTH - 1 : 0] in_a,
-    input wire [WORD_WIDTH - 1 : 0] in_b,
-    output wire [WORD_WIDTH - 1 : 0] out
+    input wire signed [WORD_WIDTH - 1 : 0] in_a,
+    input wire signed [WORD_WIDTH - 1 : 0] in_b,
+    output wire signed [WORD_WIDTH - 1 : 0] out
 );
-    reg [WORD_WIDTH - 1 : 0] reg_add;
+    reg signed [WORD_WIDTH - 1 : 0] reg_add;
 
     always @ (posedge (clk) or negedge(anrst)) begin
         if (!anrst) begin
@@ -682,7 +695,7 @@ module alu_mac # (
         end
     end
 
-    // Shift multiplication result by FRACTIONAL_BITS
+    // Shift multiplication result by FRAC_BITS
     wire [WORD_WIDTH * 2 - 1 : 0] mul_result = in_a * in_b;
-    assign out = reg_add + mul_result[FRACTIONAL_BITS +: WORD_WIDTH];
+    assign out = reg_add + mul_result[FRAC_BITS +: WORD_WIDTH];
 endmodule

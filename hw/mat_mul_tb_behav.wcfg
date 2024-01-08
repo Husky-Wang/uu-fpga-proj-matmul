@@ -1,0 +1,987 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="mat_mul_tb_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="\$unit_mat_mul_tb_sv " />
+            <top_module name="glbl" />
+            <top_module name="mat_mul_tb" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="0.000000 us"></ZoomStartTime>
+      <ZoomEndTime time="328.155001 us"></ZoomEndTime>
+      <Cursor1Time time="0.000000 us"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="220"></NameColumnWidth>
+      <ValueColumnWidth column_width="95"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="234" />
+   <wvobject type="logic" fp_name="/mat_mul_tb/DUT/accelerator/clk">
+      <obj_property name="ElementShortName">clk</obj_property>
+      <obj_property name="ObjectShortName">clk</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/mat_mul_tb/DUT/accelerator/anrst">
+      <obj_property name="ElementShortName">anrst</obj_property>
+      <obj_property name="ObjectShortName">anrst</obj_property>
+   </wvobject>
+   <wvobject fp_name="divider97" type="divider">
+      <obj_property name="label">AXIS Control</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="BkColor">#FFFF00</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/mat_mul_tb/DUT/accelerator/ctrl_axis_tready">
+      <obj_property name="ElementShortName">ctrl_axis_tready</obj_property>
+      <obj_property name="ObjectShortName">ctrl_axis_tready</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/mat_mul_tb/DUT/accelerator/ctrl_axis_tvalid">
+      <obj_property name="ElementShortName">ctrl_axis_tvalid</obj_property>
+      <obj_property name="ObjectShortName">ctrl_axis_tvalid</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/mat_mul_tb/DUT/accelerator/ctrl_axis_tlast">
+      <obj_property name="ElementShortName">ctrl_axis_tlast</obj_property>
+      <obj_property name="ObjectShortName">ctrl_axis_tlast</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mat_mul_tb/DUT/accelerator/ctrl_axis_tdata">
+      <obj_property name="ElementShortName">ctrl_axis_tdata[31:0]</obj_property>
+      <obj_property name="ObjectShortName">ctrl_axis_tdata[31:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="divider98" type="divider">
+      <obj_property name="label">AXIS Status</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="BkColor">#FFFF00</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/mat_mul_tb/DUT/accelerator/stat_axis_tvalid">
+      <obj_property name="ElementShortName">stat_axis_tvalid</obj_property>
+      <obj_property name="ObjectShortName">stat_axis_tvalid</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/mat_mul_tb/DUT/accelerator/stat_axis_tready">
+      <obj_property name="ElementShortName">stat_axis_tready</obj_property>
+      <obj_property name="ObjectShortName">stat_axis_tready</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/mat_mul_tb/DUT/accelerator/stat_axis_tlast">
+      <obj_property name="ElementShortName">stat_axis_tlast</obj_property>
+      <obj_property name="ObjectShortName">stat_axis_tlast</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mat_mul_tb/DUT/accelerator/stat_axis_tdata">
+      <obj_property name="ElementShortName">stat_axis_tdata[31:0]</obj_property>
+      <obj_property name="ObjectShortName">stat_axis_tdata[31:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="divider99" type="divider">
+      <obj_property name="label">AXIS Data In</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="BkColor">#FFFF00</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/mat_mul_tb/DUT/accelerator/in_axis_tready">
+      <obj_property name="ElementShortName">in_axis_tready</obj_property>
+      <obj_property name="ObjectShortName">in_axis_tready</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/mat_mul_tb/DUT/accelerator/in_axis_tvalid">
+      <obj_property name="ElementShortName">in_axis_tvalid</obj_property>
+      <obj_property name="ObjectShortName">in_axis_tvalid</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/mat_mul_tb/DUT/accelerator/in_axis_tlast">
+      <obj_property name="ElementShortName">in_axis_tlast</obj_property>
+      <obj_property name="ObjectShortName">in_axis_tlast</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mat_mul_tb/DUT/accelerator/in_axis_tdata">
+      <obj_property name="ElementShortName">in_axis_tdata[31:0]</obj_property>
+      <obj_property name="ObjectShortName">in_axis_tdata[31:0]</obj_property>
+      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="divider100" type="divider">
+      <obj_property name="label">AXIS Data Out</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="BkColor">#FFFF00</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/mat_mul_tb/DUT/accelerator/out_axis_tvalid">
+      <obj_property name="ElementShortName">out_axis_tvalid</obj_property>
+      <obj_property name="ObjectShortName">out_axis_tvalid</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/mat_mul_tb/DUT/accelerator/out_axis_tready">
+      <obj_property name="ElementShortName">out_axis_tready</obj_property>
+      <obj_property name="ObjectShortName">out_axis_tready</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/mat_mul_tb/DUT/accelerator/out_axis_tlast">
+      <obj_property name="ElementShortName">out_axis_tlast</obj_property>
+      <obj_property name="ObjectShortName">out_axis_tlast</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mat_mul_tb/DUT/accelerator/out_axis_tdata">
+      <obj_property name="ElementShortName">out_axis_tdata[31:0]</obj_property>
+      <obj_property name="ObjectShortName">out_axis_tdata[31:0]</obj_property>
+      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="divider101" type="divider">
+      <obj_property name="label">Internal Signals</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mat_mul_tb/DUT/accelerator/mat_row_size">
+      <obj_property name="ElementShortName">mat_row_size[31:0]</obj_property>
+      <obj_property name="ObjectShortName">mat_row_size[31:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mat_mul_tb/DUT/accelerator/mat_col_size">
+      <obj_property name="ElementShortName">mat_col_size[31:0]</obj_property>
+      <obj_property name="ObjectShortName">mat_col_size[31:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mat_mul_tb/DUT/accelerator/err">
+      <obj_property name="ElementShortName">err[1:0]</obj_property>
+      <obj_property name="ObjectShortName">err[1:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mat_mul_tb/DUT/accelerator/addr_a">
+      <obj_property name="ElementShortName">addr_a[12:0]</obj_property>
+      <obj_property name="ObjectShortName">addr_a[12:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mat_mul_tb/DUT/accelerator/addr_b">
+      <obj_property name="ElementShortName">addr_b[6:0]</obj_property>
+      <obj_property name="ObjectShortName">addr_b[6:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mat_mul_tb/DUT/accelerator/addr_r">
+      <obj_property name="ElementShortName">addr_r[5:0]</obj_property>
+      <obj_property name="ObjectShortName">addr_r[5:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mat_mul_tb/DUT/accelerator/data_a">
+      <obj_property name="ElementShortName">data_a[31:0]</obj_property>
+      <obj_property name="ObjectShortName">data_a[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mat_mul_tb/DUT/accelerator/data_b">
+      <obj_property name="ElementShortName">data_b[31:0]</obj_property>
+      <obj_property name="ObjectShortName">data_b[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mat_mul_tb/DUT/accelerator/data_r">
+      <obj_property name="ElementShortName">data_r[31:0]</obj_property>
+      <obj_property name="ObjectShortName">data_r[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/mat_mul_tb/DUT/accelerator/start_stb">
+      <obj_property name="ElementShortName">start_stb</obj_property>
+      <obj_property name="ObjectShortName">start_stb</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/mat_mul_tb/DUT/accelerator/finish">
+      <obj_property name="ElementShortName">finish</obj_property>
+      <obj_property name="ObjectShortName">finish</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/mat_mul_tb/DUT/accelerator/we_a">
+      <obj_property name="ElementShortName">we_a</obj_property>
+      <obj_property name="ObjectShortName">we_a</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/mat_mul_tb/DUT/accelerator/we_b">
+      <obj_property name="ElementShortName">we_b</obj_property>
+      <obj_property name="ObjectShortName">we_b</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/mat_mul_tb/DUT/accelerator/we_r">
+      <obj_property name="ElementShortName">we_r</obj_property>
+      <obj_property name="ObjectShortName">we_r</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/mat_mul_tb/DUT/accelerator/re_a">
+      <obj_property name="ElementShortName">re_a</obj_property>
+      <obj_property name="ObjectShortName">re_a</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/mat_mul_tb/DUT/accelerator/re_b">
+      <obj_property name="ElementShortName">re_b</obj_property>
+      <obj_property name="ObjectShortName">re_b</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/mat_mul_tb/DUT/accelerator/re_r">
+      <obj_property name="ElementShortName">re_r</obj_property>
+      <obj_property name="ObjectShortName">re_r</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/mat_mul_tb/DUT/accelerator/mac_clear">
+      <obj_property name="ElementShortName">mac_clear</obj_property>
+      <obj_property name="ObjectShortName">mac_clear</obj_property>
+   </wvobject>
+   <wvobject fp_name="divider134" type="divider">
+      <obj_property name="label">Submodule AXI CTRL IF</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="BkColor">#FF0000</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/mat_mul_tb/DUT/accelerator/axis_ctrl_inst/clk">
+      <obj_property name="ElementShortName">clk</obj_property>
+      <obj_property name="ObjectShortName">clk</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/mat_mul_tb/DUT/accelerator/axis_ctrl_inst/anrst">
+      <obj_property name="ElementShortName">anrst</obj_property>
+      <obj_property name="ObjectShortName">anrst</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/mat_mul_tb/DUT/accelerator/axis_ctrl_inst/ctrl_axis_tready">
+      <obj_property name="ElementShortName">ctrl_axis_tready</obj_property>
+      <obj_property name="ObjectShortName">ctrl_axis_tready</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/mat_mul_tb/DUT/accelerator/axis_ctrl_inst/ctrl_axis_tvalid">
+      <obj_property name="ElementShortName">ctrl_axis_tvalid</obj_property>
+      <obj_property name="ObjectShortName">ctrl_axis_tvalid</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/mat_mul_tb/DUT/accelerator/axis_ctrl_inst/ctrl_axis_tlast">
+      <obj_property name="ElementShortName">ctrl_axis_tlast</obj_property>
+      <obj_property name="ObjectShortName">ctrl_axis_tlast</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mat_mul_tb/DUT/accelerator/axis_ctrl_inst/ctrl_axis_tdata">
+      <obj_property name="ElementShortName">ctrl_axis_tdata[31:0]</obj_property>
+      <obj_property name="ObjectShortName">ctrl_axis_tdata[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/mat_mul_tb/DUT/accelerator/axis_ctrl_inst/stat_axis_tready">
+      <obj_property name="ElementShortName">stat_axis_tready</obj_property>
+      <obj_property name="ObjectShortName">stat_axis_tready</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/mat_mul_tb/DUT/accelerator/axis_ctrl_inst/stat_axis_tvalid">
+      <obj_property name="ElementShortName">stat_axis_tvalid</obj_property>
+      <obj_property name="ObjectShortName">stat_axis_tvalid</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/mat_mul_tb/DUT/accelerator/axis_ctrl_inst/stat_axis_tlast">
+      <obj_property name="ElementShortName">stat_axis_tlast</obj_property>
+      <obj_property name="ObjectShortName">stat_axis_tlast</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mat_mul_tb/DUT/accelerator/axis_ctrl_inst/stat_axis_tdata">
+      <obj_property name="ElementShortName">stat_axis_tdata[31:0]</obj_property>
+      <obj_property name="ObjectShortName">stat_axis_tdata[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mat_mul_tb/DUT/accelerator/axis_ctrl_inst/mat_row_size">
+      <obj_property name="ElementShortName">mat_row_size[31:0]</obj_property>
+      <obj_property name="ObjectShortName">mat_row_size[31:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mat_mul_tb/DUT/accelerator/axis_ctrl_inst/mat_col_size">
+      <obj_property name="ElementShortName">mat_col_size[31:0]</obj_property>
+      <obj_property name="ObjectShortName">mat_col_size[31:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/mat_mul_tb/DUT/accelerator/axis_ctrl_inst/start_stb">
+      <obj_property name="ElementShortName">start_stb</obj_property>
+      <obj_property name="ObjectShortName">start_stb</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mat_mul_tb/DUT/accelerator/axis_ctrl_inst/err">
+      <obj_property name="ElementShortName">err[1:0]</obj_property>
+      <obj_property name="ObjectShortName">err[1:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/mat_mul_tb/DUT/accelerator/axis_ctrl_inst/finish">
+      <obj_property name="ElementShortName">finish</obj_property>
+      <obj_property name="ObjectShortName">finish</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mat_mul_tb/DUT/accelerator/axis_ctrl_inst/app_data">
+      <obj_property name="ElementShortName">app_data[1:0][31:0]</obj_property>
+      <obj_property name="ObjectShortName">app_data[1:0][31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/mat_mul_tb/DUT/accelerator/axis_ctrl_inst/update_params">
+      <obj_property name="ElementShortName">update_params</obj_property>
+      <obj_property name="ObjectShortName">update_params</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mat_mul_tb/DUT/accelerator/axis_ctrl_inst/stat_cnt">
+      <obj_property name="ElementShortName">stat_cnt[2:0]</obj_property>
+      <obj_property name="ObjectShortName">stat_cnt[2:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/mat_mul_tb/DUT/accelerator/axis_ctrl_inst/stat_cnt_en">
+      <obj_property name="ElementShortName">stat_cnt_en</obj_property>
+      <obj_property name="ObjectShortName">stat_cnt_en</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/mat_mul_tb/DUT/accelerator/axis_ctrl_inst/stat_cnt_clear">
+      <obj_property name="ElementShortName">stat_cnt_clear</obj_property>
+      <obj_property name="ObjectShortName">stat_cnt_clear</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/mat_mul_tb/DUT/accelerator/axis_ctrl_inst/stat_cnt_last">
+      <obj_property name="ElementShortName">stat_cnt_last</obj_property>
+      <obj_property name="ObjectShortName">stat_cnt_last</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mat_mul_tb/DUT/accelerator/axis_ctrl_inst/err_reg">
+      <obj_property name="ElementShortName">err_reg[1:0]</obj_property>
+      <obj_property name="ObjectShortName">err_reg[1:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/mat_mul_tb/DUT/accelerator/axis_ctrl_inst/update_err">
+      <obj_property name="ElementShortName">update_err</obj_property>
+      <obj_property name="ObjectShortName">update_err</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mat_mul_tb/DUT/accelerator/axis_ctrl_inst/state">
+      <obj_property name="ElementShortName">state[2:0]</obj_property>
+      <obj_property name="ObjectShortName">state[2:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mat_mul_tb/DUT/accelerator/axis_ctrl_inst/next_state">
+      <obj_property name="ElementShortName">next_state[2:0]</obj_property>
+      <obj_property name="ObjectShortName">next_state[2:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="divider173" type="divider">
+      <obj_property name="label">Submodule AGU</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="BkColor">#FF0000</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/mat_mul_tb/DUT/accelerator/addr_ctrl_inst/clk">
+      <obj_property name="ElementShortName">clk</obj_property>
+      <obj_property name="ObjectShortName">clk</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/mat_mul_tb/DUT/accelerator/addr_ctrl_inst/anrst">
+      <obj_property name="ElementShortName">anrst</obj_property>
+      <obj_property name="ObjectShortName">anrst</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/mat_mul_tb/DUT/accelerator/addr_ctrl_inst/in_axis_tready">
+      <obj_property name="ElementShortName">in_axis_tready</obj_property>
+      <obj_property name="ObjectShortName">in_axis_tready</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/mat_mul_tb/DUT/accelerator/addr_ctrl_inst/in_axis_tvalid">
+      <obj_property name="ElementShortName">in_axis_tvalid</obj_property>
+      <obj_property name="ObjectShortName">in_axis_tvalid</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/mat_mul_tb/DUT/accelerator/addr_ctrl_inst/in_axis_tlast">
+      <obj_property name="ElementShortName">in_axis_tlast</obj_property>
+      <obj_property name="ObjectShortName">in_axis_tlast</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/mat_mul_tb/DUT/accelerator/addr_ctrl_inst/out_axis_tready">
+      <obj_property name="ElementShortName">out_axis_tready</obj_property>
+      <obj_property name="ObjectShortName">out_axis_tready</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/mat_mul_tb/DUT/accelerator/addr_ctrl_inst/out_axis_tvalid">
+      <obj_property name="ElementShortName">out_axis_tvalid</obj_property>
+      <obj_property name="ObjectShortName">out_axis_tvalid</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/mat_mul_tb/DUT/accelerator/addr_ctrl_inst/out_axis_tlast">
+      <obj_property name="ElementShortName">out_axis_tlast</obj_property>
+      <obj_property name="ObjectShortName">out_axis_tlast</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mat_mul_tb/DUT/accelerator/addr_ctrl_inst/mat_row_size">
+      <obj_property name="ElementShortName">mat_row_size[31:0]</obj_property>
+      <obj_property name="ObjectShortName">mat_row_size[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mat_mul_tb/DUT/accelerator/addr_ctrl_inst/mat_col_size">
+      <obj_property name="ElementShortName">mat_col_size[31:0]</obj_property>
+      <obj_property name="ObjectShortName">mat_col_size[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/mat_mul_tb/DUT/accelerator/addr_ctrl_inst/start_stb">
+      <obj_property name="ElementShortName">start_stb</obj_property>
+      <obj_property name="ObjectShortName">start_stb</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mat_mul_tb/DUT/accelerator/addr_ctrl_inst/err">
+      <obj_property name="ElementShortName">err[1:0]</obj_property>
+      <obj_property name="ObjectShortName">err[1:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/mat_mul_tb/DUT/accelerator/addr_ctrl_inst/finish">
+      <obj_property name="ElementShortName">finish</obj_property>
+      <obj_property name="ObjectShortName">finish</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/mat_mul_tb/DUT/accelerator/addr_ctrl_inst/we_a">
+      <obj_property name="ElementShortName">we_a</obj_property>
+      <obj_property name="ObjectShortName">we_a</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/mat_mul_tb/DUT/accelerator/addr_ctrl_inst/we_b">
+      <obj_property name="ElementShortName">we_b</obj_property>
+      <obj_property name="ObjectShortName">we_b</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/mat_mul_tb/DUT/accelerator/addr_ctrl_inst/we_r">
+      <obj_property name="ElementShortName">we_r</obj_property>
+      <obj_property name="ObjectShortName">we_r</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/mat_mul_tb/DUT/accelerator/addr_ctrl_inst/re_a">
+      <obj_property name="ElementShortName">re_a</obj_property>
+      <obj_property name="ObjectShortName">re_a</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/mat_mul_tb/DUT/accelerator/addr_ctrl_inst/re_b">
+      <obj_property name="ElementShortName">re_b</obj_property>
+      <obj_property name="ObjectShortName">re_b</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/mat_mul_tb/DUT/accelerator/addr_ctrl_inst/re_r">
+      <obj_property name="ElementShortName">re_r</obj_property>
+      <obj_property name="ObjectShortName">re_r</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mat_mul_tb/DUT/accelerator/addr_ctrl_inst/addr_a">
+      <obj_property name="ElementShortName">addr_a[12:0]</obj_property>
+      <obj_property name="ObjectShortName">addr_a[12:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mat_mul_tb/DUT/accelerator/addr_ctrl_inst/addr_b">
+      <obj_property name="ElementShortName">addr_b[6:0]</obj_property>
+      <obj_property name="ObjectShortName">addr_b[6:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mat_mul_tb/DUT/accelerator/addr_ctrl_inst/addr_r">
+      <obj_property name="ElementShortName">addr_r[5:0]</obj_property>
+      <obj_property name="ObjectShortName">addr_r[5:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/mat_mul_tb/DUT/accelerator/addr_ctrl_inst/mac_clear">
+      <obj_property name="ElementShortName">mac_clear</obj_property>
+      <obj_property name="ObjectShortName">mac_clear</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mat_mul_tb/DUT/accelerator/addr_ctrl_inst/mat_row_size_reg">
+      <obj_property name="ElementShortName">mat_row_size_reg[31:0]</obj_property>
+      <obj_property name="ObjectShortName">mat_row_size_reg[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mat_mul_tb/DUT/accelerator/addr_ctrl_inst/mat_col_size_reg">
+      <obj_property name="ElementShortName">mat_col_size_reg[31:0]</obj_property>
+      <obj_property name="ObjectShortName">mat_col_size_reg[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/mat_mul_tb/DUT/accelerator/addr_ctrl_inst/update_params">
+      <obj_property name="ElementShortName">update_params</obj_property>
+      <obj_property name="ObjectShortName">update_params</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mat_mul_tb/DUT/accelerator/addr_ctrl_inst/a_row_cnt">
+      <obj_property name="ElementShortName">a_row_cnt[5:0]</obj_property>
+      <obj_property name="ObjectShortName">a_row_cnt[5:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/mat_mul_tb/DUT/accelerator/addr_ctrl_inst/a_row_cnt_last">
+      <obj_property name="ElementShortName">a_row_cnt_last</obj_property>
+      <obj_property name="ObjectShortName">a_row_cnt_last</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/mat_mul_tb/DUT/accelerator/addr_ctrl_inst/a_row_cnt_en">
+      <obj_property name="ElementShortName">a_row_cnt_en</obj_property>
+      <obj_property name="ObjectShortName">a_row_cnt_en</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/mat_mul_tb/DUT/accelerator/addr_ctrl_inst/a_row_cnt_clear">
+      <obj_property name="ElementShortName">a_row_cnt_clear</obj_property>
+      <obj_property name="ObjectShortName">a_row_cnt_clear</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mat_mul_tb/DUT/accelerator/addr_ctrl_inst/a_col_cnt">
+      <obj_property name="ElementShortName">a_col_cnt[6:0]</obj_property>
+      <obj_property name="ObjectShortName">a_col_cnt[6:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/mat_mul_tb/DUT/accelerator/addr_ctrl_inst/a_col_cnt_last">
+      <obj_property name="ElementShortName">a_col_cnt_last</obj_property>
+      <obj_property name="ObjectShortName">a_col_cnt_last</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/mat_mul_tb/DUT/accelerator/addr_ctrl_inst/a_col_cnt_en">
+      <obj_property name="ElementShortName">a_col_cnt_en</obj_property>
+      <obj_property name="ObjectShortName">a_col_cnt_en</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/mat_mul_tb/DUT/accelerator/addr_ctrl_inst/a_col_cnt_clear">
+      <obj_property name="ElementShortName">a_col_cnt_clear</obj_property>
+      <obj_property name="ObjectShortName">a_col_cnt_clear</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mat_mul_tb/DUT/accelerator/addr_ctrl_inst/b_cnt">
+      <obj_property name="ElementShortName">b_cnt[6:0]</obj_property>
+      <obj_property name="ObjectShortName">b_cnt[6:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/mat_mul_tb/DUT/accelerator/addr_ctrl_inst/b_cnt_last">
+      <obj_property name="ElementShortName">b_cnt_last</obj_property>
+      <obj_property name="ObjectShortName">b_cnt_last</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/mat_mul_tb/DUT/accelerator/addr_ctrl_inst/b_cnt_en">
+      <obj_property name="ElementShortName">b_cnt_en</obj_property>
+      <obj_property name="ObjectShortName">b_cnt_en</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/mat_mul_tb/DUT/accelerator/addr_ctrl_inst/b_cnt_clear">
+      <obj_property name="ElementShortName">b_cnt_clear</obj_property>
+      <obj_property name="ObjectShortName">b_cnt_clear</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mat_mul_tb/DUT/accelerator/addr_ctrl_inst/r_cnt">
+      <obj_property name="ElementShortName">r_cnt[5:0]</obj_property>
+      <obj_property name="ObjectShortName">r_cnt[5:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/mat_mul_tb/DUT/accelerator/addr_ctrl_inst/r_cnt_last">
+      <obj_property name="ElementShortName">r_cnt_last</obj_property>
+      <obj_property name="ObjectShortName">r_cnt_last</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/mat_mul_tb/DUT/accelerator/addr_ctrl_inst/r_cnt_en">
+      <obj_property name="ElementShortName">r_cnt_en</obj_property>
+      <obj_property name="ObjectShortName">r_cnt_en</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/mat_mul_tb/DUT/accelerator/addr_ctrl_inst/r_cnt_clear">
+      <obj_property name="ElementShortName">r_cnt_clear</obj_property>
+      <obj_property name="ObjectShortName">r_cnt_clear</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mat_mul_tb/DUT/accelerator/addr_ctrl_inst/state">
+      <obj_property name="ElementShortName">state[3:0]</obj_property>
+      <obj_property name="ObjectShortName">state[3:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mat_mul_tb/DUT/accelerator/addr_ctrl_inst/next_state">
+      <obj_property name="ElementShortName">next_state[3:0]</obj_property>
+      <obj_property name="ObjectShortName">next_state[3:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mat_mul_tb/DUT/accelerator/addr_ctrl_inst/MAT_MAX_ROW">
+      <obj_property name="ElementShortName">MAT_MAX_ROW[31:0]</obj_property>
+      <obj_property name="ObjectShortName">MAT_MAX_ROW[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mat_mul_tb/DUT/accelerator/addr_ctrl_inst/MAT_MAX_COL">
+      <obj_property name="ElementShortName">MAT_MAX_COL[31:0]</obj_property>
+      <obj_property name="ObjectShortName">MAT_MAX_COL[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mat_mul_tb/DUT/accelerator/addr_ctrl_inst/MAT_MAX_ROW_BITS">
+      <obj_property name="ElementShortName">MAT_MAX_ROW_BITS[31:0]</obj_property>
+      <obj_property name="ObjectShortName">MAT_MAX_ROW_BITS[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mat_mul_tb/DUT/accelerator/addr_ctrl_inst/MAT_MAX_COL_BITS">
+      <obj_property name="ElementShortName">MAT_MAX_COL_BITS[31:0]</obj_property>
+      <obj_property name="ObjectShortName">MAT_MAX_COL_BITS[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mat_mul_tb/DUT/accelerator/addr_ctrl_inst/MAT_MAX_SIZE">
+      <obj_property name="ElementShortName">MAT_MAX_SIZE[31:0]</obj_property>
+      <obj_property name="ObjectShortName">MAT_MAX_SIZE[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mat_mul_tb/DUT/accelerator/addr_ctrl_inst/MAT_MAX_SIZE_BITS">
+      <obj_property name="ElementShortName">MAT_MAX_SIZE_BITS[31:0]</obj_property>
+      <obj_property name="ObjectShortName">MAT_MAX_SIZE_BITS[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mat_mul_tb/DUT/accelerator/addr_ctrl_inst/FSM_IDLE">
+      <obj_property name="ElementShortName">FSM_IDLE[31:0]</obj_property>
+      <obj_property name="ObjectShortName">FSM_IDLE[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mat_mul_tb/DUT/accelerator/addr_ctrl_inst/FSM_CHECK">
+      <obj_property name="ElementShortName">FSM_CHECK[31:0]</obj_property>
+      <obj_property name="ObjectShortName">FSM_CHECK[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mat_mul_tb/DUT/accelerator/addr_ctrl_inst/FSM_INPUT_A">
+      <obj_property name="ElementShortName">FSM_INPUT_A[31:0]</obj_property>
+      <obj_property name="ObjectShortName">FSM_INPUT_A[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mat_mul_tb/DUT/accelerator/addr_ctrl_inst/FSM_INPUT_B">
+      <obj_property name="ElementShortName">FSM_INPUT_B[31:0]</obj_property>
+      <obj_property name="ObjectShortName">FSM_INPUT_B[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mat_mul_tb/DUT/accelerator/addr_ctrl_inst/FSM_CALC_PRE">
+      <obj_property name="ElementShortName">FSM_CALC_PRE[31:0]</obj_property>
+      <obj_property name="ObjectShortName">FSM_CALC_PRE[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mat_mul_tb/DUT/accelerator/addr_ctrl_inst/FSM_CALC_VECT">
+      <obj_property name="ElementShortName">FSM_CALC_VECT[31:0]</obj_property>
+      <obj_property name="ObjectShortName">FSM_CALC_VECT[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mat_mul_tb/DUT/accelerator/addr_ctrl_inst/FSM_CALC_NEXT">
+      <obj_property name="ElementShortName">FSM_CALC_NEXT[31:0]</obj_property>
+      <obj_property name="ObjectShortName">FSM_CALC_NEXT[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mat_mul_tb/DUT/accelerator/addr_ctrl_inst/FSM_OUT_PRE">
+      <obj_property name="ElementShortName">FSM_OUT_PRE[31:0]</obj_property>
+      <obj_property name="ObjectShortName">FSM_OUT_PRE[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mat_mul_tb/DUT/accelerator/addr_ctrl_inst/FSM_OUT">
+      <obj_property name="ElementShortName">FSM_OUT[31:0]</obj_property>
+      <obj_property name="ObjectShortName">FSM_OUT[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mat_mul_tb/DUT/accelerator/addr_ctrl_inst/FSM_ERR">
+      <obj_property name="ElementShortName">FSM_ERR[31:0]</obj_property>
+      <obj_property name="ObjectShortName">FSM_ERR[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="divider621" type="divider">
+      <obj_property name="label">Counter A Row</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="BkColor">#800080</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/mat_mul_tb/DUT/accelerator/addr_ctrl_inst/a_row_counter/clk">
+      <obj_property name="ElementShortName">clk</obj_property>
+      <obj_property name="ObjectShortName">clk</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/mat_mul_tb/DUT/accelerator/addr_ctrl_inst/a_row_counter/anrst">
+      <obj_property name="ElementShortName">anrst</obj_property>
+      <obj_property name="ObjectShortName">anrst</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/mat_mul_tb/DUT/accelerator/addr_ctrl_inst/a_row_counter/en">
+      <obj_property name="ElementShortName">en</obj_property>
+      <obj_property name="ObjectShortName">en</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/mat_mul_tb/DUT/accelerator/addr_ctrl_inst/a_row_counter/clear">
+      <obj_property name="ElementShortName">clear</obj_property>
+      <obj_property name="ObjectShortName">clear</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mat_mul_tb/DUT/accelerator/addr_ctrl_inst/a_row_counter/top">
+      <obj_property name="ElementShortName">top[5:0]</obj_property>
+      <obj_property name="ObjectShortName">top[5:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mat_mul_tb/DUT/accelerator/addr_ctrl_inst/a_row_counter/count">
+      <obj_property name="ElementShortName">count[5:0]</obj_property>
+      <obj_property name="ObjectShortName">count[5:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/mat_mul_tb/DUT/accelerator/addr_ctrl_inst/a_row_counter/last">
+      <obj_property name="ElementShortName">last</obj_property>
+      <obj_property name="ObjectShortName">last</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mat_mul_tb/DUT/accelerator/addr_ctrl_inst/a_row_counter/COUNTER_BITS">
+      <obj_property name="ElementShortName">COUNTER_BITS[31:0]</obj_property>
+      <obj_property name="ObjectShortName">COUNTER_BITS[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="divider622" type="divider">
+      <obj_property name="label">Counter A Col</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="BkColor">#800080</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/mat_mul_tb/DUT/accelerator/addr_ctrl_inst/a_col_counter/clk">
+      <obj_property name="ElementShortName">clk</obj_property>
+      <obj_property name="ObjectShortName">clk</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/mat_mul_tb/DUT/accelerator/addr_ctrl_inst/a_col_counter/anrst">
+      <obj_property name="ElementShortName">anrst</obj_property>
+      <obj_property name="ObjectShortName">anrst</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/mat_mul_tb/DUT/accelerator/addr_ctrl_inst/a_col_counter/en">
+      <obj_property name="ElementShortName">en</obj_property>
+      <obj_property name="ObjectShortName">en</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/mat_mul_tb/DUT/accelerator/addr_ctrl_inst/a_col_counter/clear">
+      <obj_property name="ElementShortName">clear</obj_property>
+      <obj_property name="ObjectShortName">clear</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mat_mul_tb/DUT/accelerator/addr_ctrl_inst/a_col_counter/top">
+      <obj_property name="ElementShortName">top[6:0]</obj_property>
+      <obj_property name="ObjectShortName">top[6:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mat_mul_tb/DUT/accelerator/addr_ctrl_inst/a_col_counter/count">
+      <obj_property name="ElementShortName">count[6:0]</obj_property>
+      <obj_property name="ObjectShortName">count[6:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/mat_mul_tb/DUT/accelerator/addr_ctrl_inst/a_col_counter/last">
+      <obj_property name="ElementShortName">last</obj_property>
+      <obj_property name="ObjectShortName">last</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mat_mul_tb/DUT/accelerator/addr_ctrl_inst/a_col_counter/COUNTER_BITS">
+      <obj_property name="ElementShortName">COUNTER_BITS[31:0]</obj_property>
+      <obj_property name="ObjectShortName">COUNTER_BITS[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="divider623" type="divider">
+      <obj_property name="label">Counter B</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="BkColor">#800080</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/mat_mul_tb/DUT/accelerator/addr_ctrl_inst/b_counter/clk">
+      <obj_property name="ElementShortName">clk</obj_property>
+      <obj_property name="ObjectShortName">clk</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/mat_mul_tb/DUT/accelerator/addr_ctrl_inst/b_counter/anrst">
+      <obj_property name="ElementShortName">anrst</obj_property>
+      <obj_property name="ObjectShortName">anrst</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/mat_mul_tb/DUT/accelerator/addr_ctrl_inst/b_counter/en">
+      <obj_property name="ElementShortName">en</obj_property>
+      <obj_property name="ObjectShortName">en</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/mat_mul_tb/DUT/accelerator/addr_ctrl_inst/b_counter/clear">
+      <obj_property name="ElementShortName">clear</obj_property>
+      <obj_property name="ObjectShortName">clear</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mat_mul_tb/DUT/accelerator/addr_ctrl_inst/b_counter/top">
+      <obj_property name="ElementShortName">top[6:0]</obj_property>
+      <obj_property name="ObjectShortName">top[6:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mat_mul_tb/DUT/accelerator/addr_ctrl_inst/b_counter/count">
+      <obj_property name="ElementShortName">count[6:0]</obj_property>
+      <obj_property name="ObjectShortName">count[6:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/mat_mul_tb/DUT/accelerator/addr_ctrl_inst/b_counter/last">
+      <obj_property name="ElementShortName">last</obj_property>
+      <obj_property name="ObjectShortName">last</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mat_mul_tb/DUT/accelerator/addr_ctrl_inst/b_counter/COUNTER_BITS">
+      <obj_property name="ElementShortName">COUNTER_BITS[31:0]</obj_property>
+      <obj_property name="ObjectShortName">COUNTER_BITS[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="divider624" type="divider">
+      <obj_property name="label">Coutner R</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="BkColor">#800080</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/mat_mul_tb/DUT/accelerator/addr_ctrl_inst/r_counter/clk">
+      <obj_property name="ElementShortName">clk</obj_property>
+      <obj_property name="ObjectShortName">clk</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/mat_mul_tb/DUT/accelerator/addr_ctrl_inst/r_counter/anrst">
+      <obj_property name="ElementShortName">anrst</obj_property>
+      <obj_property name="ObjectShortName">anrst</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/mat_mul_tb/DUT/accelerator/addr_ctrl_inst/r_counter/en">
+      <obj_property name="ElementShortName">en</obj_property>
+      <obj_property name="ObjectShortName">en</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/mat_mul_tb/DUT/accelerator/addr_ctrl_inst/r_counter/clear">
+      <obj_property name="ElementShortName">clear</obj_property>
+      <obj_property name="ObjectShortName">clear</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mat_mul_tb/DUT/accelerator/addr_ctrl_inst/r_counter/top">
+      <obj_property name="ElementShortName">top[5:0]</obj_property>
+      <obj_property name="ObjectShortName">top[5:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mat_mul_tb/DUT/accelerator/addr_ctrl_inst/r_counter/count">
+      <obj_property name="ElementShortName">count[5:0]</obj_property>
+      <obj_property name="ObjectShortName">count[5:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/mat_mul_tb/DUT/accelerator/addr_ctrl_inst/r_counter/last">
+      <obj_property name="ElementShortName">last</obj_property>
+      <obj_property name="ObjectShortName">last</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mat_mul_tb/DUT/accelerator/addr_ctrl_inst/r_counter/COUNTER_BITS">
+      <obj_property name="ElementShortName">COUNTER_BITS[31:0]</obj_property>
+      <obj_property name="ObjectShortName">COUNTER_BITS[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="divider366" type="divider">
+      <obj_property name="label">BRAM_A</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="BkColor">#A52A2A</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/mat_mul_tb/DUT/accelerator/bram_a/clk">
+      <obj_property name="ElementShortName">clk</obj_property>
+      <obj_property name="ObjectShortName">clk</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mat_mul_tb/DUT/accelerator/bram_a/w_addr">
+      <obj_property name="ElementShortName">w_addr[12:0]</obj_property>
+      <obj_property name="ObjectShortName">w_addr[12:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mat_mul_tb/DUT/accelerator/bram_a/w_data">
+      <obj_property name="ElementShortName">w_data[31:0]</obj_property>
+      <obj_property name="ObjectShortName">w_data[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/mat_mul_tb/DUT/accelerator/bram_a/we">
+      <obj_property name="ElementShortName">we</obj_property>
+      <obj_property name="ObjectShortName">we</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mat_mul_tb/DUT/accelerator/bram_a/r_addr">
+      <obj_property name="ElementShortName">r_addr[12:0]</obj_property>
+      <obj_property name="ObjectShortName">r_addr[12:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mat_mul_tb/DUT/accelerator/bram_a/r_data">
+      <obj_property name="ElementShortName">r_data[31:0]</obj_property>
+      <obj_property name="ObjectShortName">r_data[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/mat_mul_tb/DUT/accelerator/bram_a/re">
+      <obj_property name="ElementShortName">re</obj_property>
+      <obj_property name="ObjectShortName">re</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mat_mul_tb/DUT/accelerator/bram_a/\genblk1.r_data_int ">
+      <obj_property name="ElementShortName">\genblk1.r_data_int [31:0]</obj_property>
+      <obj_property name="ObjectShortName">\genblk1.r_data_int [31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mat_mul_tb/DUT/accelerator/bram_a/WORD_WIDTH">
+      <obj_property name="ElementShortName">WORD_WIDTH[31:0]</obj_property>
+      <obj_property name="ObjectShortName">WORD_WIDTH[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mat_mul_tb/DUT/accelerator/bram_a/W_WORD_WIDTH_WORDS">
+      <obj_property name="ElementShortName">W_WORD_WIDTH_WORDS[31:0]</obj_property>
+      <obj_property name="ObjectShortName">W_WORD_WIDTH_WORDS[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mat_mul_tb/DUT/accelerator/bram_a/R_WORD_WIDTH_WORDS">
+      <obj_property name="ElementShortName">R_WORD_WIDTH_WORDS[31:0]</obj_property>
+      <obj_property name="ObjectShortName">R_WORD_WIDTH_WORDS[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mat_mul_tb/DUT/accelerator/bram_a/MEM_SIZE_WORDS">
+      <obj_property name="ElementShortName">MEM_SIZE_WORDS[31:0]</obj_property>
+      <obj_property name="ObjectShortName">MEM_SIZE_WORDS[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mat_mul_tb/DUT/accelerator/bram_a/W_ADDR_SIZE">
+      <obj_property name="ElementShortName">W_ADDR_SIZE[31:0]</obj_property>
+      <obj_property name="ObjectShortName">W_ADDR_SIZE[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mat_mul_tb/DUT/accelerator/bram_a/W_ADDR_BITS">
+      <obj_property name="ElementShortName">W_ADDR_BITS[31:0]</obj_property>
+      <obj_property name="ObjectShortName">W_ADDR_BITS[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mat_mul_tb/DUT/accelerator/bram_a/W_DATA_BITS">
+      <obj_property name="ElementShortName">W_DATA_BITS[31:0]</obj_property>
+      <obj_property name="ObjectShortName">W_DATA_BITS[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mat_mul_tb/DUT/accelerator/bram_a/R_ADDR_SIZE">
+      <obj_property name="ElementShortName">R_ADDR_SIZE[31:0]</obj_property>
+      <obj_property name="ObjectShortName">R_ADDR_SIZE[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mat_mul_tb/DUT/accelerator/bram_a/R_ADDR_BITS">
+      <obj_property name="ElementShortName">R_ADDR_BITS[31:0]</obj_property>
+      <obj_property name="ObjectShortName">R_ADDR_BITS[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mat_mul_tb/DUT/accelerator/bram_a/R_DATA_BITS">
+      <obj_property name="ElementShortName">R_DATA_BITS[31:0]</obj_property>
+      <obj_property name="ObjectShortName">R_DATA_BITS[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="divider367" type="divider">
+      <obj_property name="label">BRAM_B</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="BkColor">#A52A2A</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/mat_mul_tb/DUT/accelerator/bram_b/clk">
+      <obj_property name="ElementShortName">clk</obj_property>
+      <obj_property name="ObjectShortName">clk</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mat_mul_tb/DUT/accelerator/bram_b/w_addr">
+      <obj_property name="ElementShortName">w_addr[6:0]</obj_property>
+      <obj_property name="ObjectShortName">w_addr[6:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mat_mul_tb/DUT/accelerator/bram_b/w_data">
+      <obj_property name="ElementShortName">w_data[31:0]</obj_property>
+      <obj_property name="ObjectShortName">w_data[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/mat_mul_tb/DUT/accelerator/bram_b/we">
+      <obj_property name="ElementShortName">we</obj_property>
+      <obj_property name="ObjectShortName">we</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mat_mul_tb/DUT/accelerator/bram_b/r_addr">
+      <obj_property name="ElementShortName">r_addr[6:0]</obj_property>
+      <obj_property name="ObjectShortName">r_addr[6:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mat_mul_tb/DUT/accelerator/bram_b/r_data">
+      <obj_property name="ElementShortName">r_data[31:0]</obj_property>
+      <obj_property name="ObjectShortName">r_data[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/mat_mul_tb/DUT/accelerator/bram_b/re">
+      <obj_property name="ElementShortName">re</obj_property>
+      <obj_property name="ObjectShortName">re</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mat_mul_tb/DUT/accelerator/bram_b/\genblk1.mem_inst ">
+      <obj_property name="ElementShortName">\genblk1.mem_inst [128:0][31:0]</obj_property>
+      <obj_property name="ObjectShortName">\genblk1.mem_inst [128:0][31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mat_mul_tb/DUT/accelerator/bram_b/\genblk1.r_data_int ">
+      <obj_property name="ElementShortName">\genblk1.r_data_int [31:0]</obj_property>
+      <obj_property name="ObjectShortName">\genblk1.r_data_int [31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mat_mul_tb/DUT/accelerator/bram_b/WORD_WIDTH">
+      <obj_property name="ElementShortName">WORD_WIDTH[31:0]</obj_property>
+      <obj_property name="ObjectShortName">WORD_WIDTH[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mat_mul_tb/DUT/accelerator/bram_b/W_WORD_WIDTH_WORDS">
+      <obj_property name="ElementShortName">W_WORD_WIDTH_WORDS[31:0]</obj_property>
+      <obj_property name="ObjectShortName">W_WORD_WIDTH_WORDS[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mat_mul_tb/DUT/accelerator/bram_b/R_WORD_WIDTH_WORDS">
+      <obj_property name="ElementShortName">R_WORD_WIDTH_WORDS[31:0]</obj_property>
+      <obj_property name="ObjectShortName">R_WORD_WIDTH_WORDS[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mat_mul_tb/DUT/accelerator/bram_b/MEM_SIZE_WORDS">
+      <obj_property name="ElementShortName">MEM_SIZE_WORDS[31:0]</obj_property>
+      <obj_property name="ObjectShortName">MEM_SIZE_WORDS[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mat_mul_tb/DUT/accelerator/bram_b/W_ADDR_SIZE">
+      <obj_property name="ElementShortName">W_ADDR_SIZE[31:0]</obj_property>
+      <obj_property name="ObjectShortName">W_ADDR_SIZE[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mat_mul_tb/DUT/accelerator/bram_b/W_ADDR_BITS">
+      <obj_property name="ElementShortName">W_ADDR_BITS[31:0]</obj_property>
+      <obj_property name="ObjectShortName">W_ADDR_BITS[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mat_mul_tb/DUT/accelerator/bram_b/W_DATA_BITS">
+      <obj_property name="ElementShortName">W_DATA_BITS[31:0]</obj_property>
+      <obj_property name="ObjectShortName">W_DATA_BITS[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mat_mul_tb/DUT/accelerator/bram_b/R_ADDR_SIZE">
+      <obj_property name="ElementShortName">R_ADDR_SIZE[31:0]</obj_property>
+      <obj_property name="ObjectShortName">R_ADDR_SIZE[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mat_mul_tb/DUT/accelerator/bram_b/R_ADDR_BITS">
+      <obj_property name="ElementShortName">R_ADDR_BITS[31:0]</obj_property>
+      <obj_property name="ObjectShortName">R_ADDR_BITS[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mat_mul_tb/DUT/accelerator/bram_b/R_DATA_BITS">
+      <obj_property name="ElementShortName">R_DATA_BITS[31:0]</obj_property>
+      <obj_property name="ObjectShortName">R_DATA_BITS[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="divider384" type="divider">
+      <obj_property name="label">BRAM_R</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="BkColor">#A52A2A</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/mat_mul_tb/DUT/accelerator/bram_r/clk">
+      <obj_property name="ElementShortName">clk</obj_property>
+      <obj_property name="ObjectShortName">clk</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mat_mul_tb/DUT/accelerator/bram_r/w_addr">
+      <obj_property name="ElementShortName">w_addr[5:0]</obj_property>
+      <obj_property name="ObjectShortName">w_addr[5:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mat_mul_tb/DUT/accelerator/bram_r/w_data">
+      <obj_property name="ElementShortName">w_data[31:0]</obj_property>
+      <obj_property name="ObjectShortName">w_data[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/mat_mul_tb/DUT/accelerator/bram_r/we">
+      <obj_property name="ElementShortName">we</obj_property>
+      <obj_property name="ObjectShortName">we</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mat_mul_tb/DUT/accelerator/bram_r/r_addr">
+      <obj_property name="ElementShortName">r_addr[5:0]</obj_property>
+      <obj_property name="ObjectShortName">r_addr[5:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mat_mul_tb/DUT/accelerator/bram_r/r_data">
+      <obj_property name="ElementShortName">r_data[31:0]</obj_property>
+      <obj_property name="ObjectShortName">r_data[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/mat_mul_tb/DUT/accelerator/bram_r/re">
+      <obj_property name="ElementShortName">re</obj_property>
+      <obj_property name="ObjectShortName">re</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mat_mul_tb/DUT/accelerator/bram_r/\genblk1.mem_inst ">
+      <obj_property name="ElementShortName">\genblk1.mem_inst [64:0][31:0]</obj_property>
+      <obj_property name="ObjectShortName">\genblk1.mem_inst [64:0][31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mat_mul_tb/DUT/accelerator/bram_r/\genblk1.r_data_int ">
+      <obj_property name="ElementShortName">\genblk1.r_data_int [31:0]</obj_property>
+      <obj_property name="ObjectShortName">\genblk1.r_data_int [31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mat_mul_tb/DUT/accelerator/bram_r/WORD_WIDTH">
+      <obj_property name="ElementShortName">WORD_WIDTH[31:0]</obj_property>
+      <obj_property name="ObjectShortName">WORD_WIDTH[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mat_mul_tb/DUT/accelerator/bram_r/W_WORD_WIDTH_WORDS">
+      <obj_property name="ElementShortName">W_WORD_WIDTH_WORDS[31:0]</obj_property>
+      <obj_property name="ObjectShortName">W_WORD_WIDTH_WORDS[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mat_mul_tb/DUT/accelerator/bram_r/R_WORD_WIDTH_WORDS">
+      <obj_property name="ElementShortName">R_WORD_WIDTH_WORDS[31:0]</obj_property>
+      <obj_property name="ObjectShortName">R_WORD_WIDTH_WORDS[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mat_mul_tb/DUT/accelerator/bram_r/MEM_SIZE_WORDS">
+      <obj_property name="ElementShortName">MEM_SIZE_WORDS[31:0]</obj_property>
+      <obj_property name="ObjectShortName">MEM_SIZE_WORDS[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mat_mul_tb/DUT/accelerator/bram_r/W_ADDR_SIZE">
+      <obj_property name="ElementShortName">W_ADDR_SIZE[31:0]</obj_property>
+      <obj_property name="ObjectShortName">W_ADDR_SIZE[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mat_mul_tb/DUT/accelerator/bram_r/W_ADDR_BITS">
+      <obj_property name="ElementShortName">W_ADDR_BITS[31:0]</obj_property>
+      <obj_property name="ObjectShortName">W_ADDR_BITS[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mat_mul_tb/DUT/accelerator/bram_r/W_DATA_BITS">
+      <obj_property name="ElementShortName">W_DATA_BITS[31:0]</obj_property>
+      <obj_property name="ObjectShortName">W_DATA_BITS[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mat_mul_tb/DUT/accelerator/bram_r/R_ADDR_SIZE">
+      <obj_property name="ElementShortName">R_ADDR_SIZE[31:0]</obj_property>
+      <obj_property name="ObjectShortName">R_ADDR_SIZE[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mat_mul_tb/DUT/accelerator/bram_r/R_ADDR_BITS">
+      <obj_property name="ElementShortName">R_ADDR_BITS[31:0]</obj_property>
+      <obj_property name="ObjectShortName">R_ADDR_BITS[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mat_mul_tb/DUT/accelerator/bram_r/R_DATA_BITS">
+      <obj_property name="ElementShortName">R_DATA_BITS[31:0]</obj_property>
+      <obj_property name="ObjectShortName">R_DATA_BITS[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="divider386" type="divider">
+      <obj_property name="label">MAC</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="BkColor">#D2691E</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/mat_mul_tb/DUT/accelerator/alu_mac_inst/clk">
+      <obj_property name="ElementShortName">clk</obj_property>
+      <obj_property name="ObjectShortName">clk</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/mat_mul_tb/DUT/accelerator/alu_mac_inst/anrst">
+      <obj_property name="ElementShortName">anrst</obj_property>
+      <obj_property name="ObjectShortName">anrst</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/mat_mul_tb/DUT/accelerator/alu_mac_inst/clear">
+      <obj_property name="ElementShortName">clear</obj_property>
+      <obj_property name="ObjectShortName">clear</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mat_mul_tb/DUT/accelerator/alu_mac_inst/in_a">
+      <obj_property name="ElementShortName">in_a[31:0]</obj_property>
+      <obj_property name="ObjectShortName">in_a[31:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mat_mul_tb/DUT/accelerator/alu_mac_inst/in_b">
+      <obj_property name="ElementShortName">in_b[31:0]</obj_property>
+      <obj_property name="ObjectShortName">in_b[31:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mat_mul_tb/DUT/accelerator/alu_mac_inst/out">
+      <obj_property name="ElementShortName">out[31:0]</obj_property>
+      <obj_property name="ObjectShortName">out[31:0]</obj_property>
+      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mat_mul_tb/DUT/accelerator/alu_mac_inst/reg_add">
+      <obj_property name="ElementShortName">reg_add[31:0]</obj_property>
+      <obj_property name="ObjectShortName">reg_add[31:0]</obj_property>
+      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mat_mul_tb/DUT/accelerator/alu_mac_inst/mul_result">
+      <obj_property name="ElementShortName">mul_result[63:0]</obj_property>
+      <obj_property name="ObjectShortName">mul_result[63:0]</obj_property>
+      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mat_mul_tb/DUT/accelerator/alu_mac_inst/WORD_WIDTH">
+      <obj_property name="ElementShortName">WORD_WIDTH[31:0]</obj_property>
+      <obj_property name="ObjectShortName">WORD_WIDTH[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/mat_mul_tb/DUT/accelerator/alu_mac_inst/FRAC_BITS">
+      <obj_property name="ElementShortName">FRAC_BITS[31:0]</obj_property>
+      <obj_property name="ObjectShortName">FRAC_BITS[31:0]</obj_property>
+   </wvobject>
+</wave_config>
