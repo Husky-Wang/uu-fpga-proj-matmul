@@ -35,7 +35,7 @@ class matrix # (
     };
     constraint data_constr {
         foreach (data[i]) {
-            data[i] inside {[-100 : 100]};
+            data[i] inside {[-1024 : 1024]};
         }
     };
 
@@ -189,9 +189,9 @@ class tb # (
         end
 
         // Reset used signals
-        dut_axis_ctrl.tvalid = 1'b0;
-        dut_axis_ctrl.tlast = 1'b0;
-        dut_axis_ctrl.tdata = 'b0;
+        this.dut_axis_ctrl.tvalid = 1'b0;
+        this.dut_axis_ctrl.tlast = 1'b0;
+        this.dut_axis_ctrl.tdata = 'b0;
     endtask
 
     task load_data();
@@ -200,15 +200,12 @@ class tb # (
         // Transmit Mat_A
         @ (posedge(this.dut_misc.clk));
         this.dut_axis_data_in.tvalid = 1'b1;
+        // TLAST
+        this.dut_axis_data_in.tlast = 1'b0;
         for (row = 0; row < this.mat_a.size_row; row = row + 1) begin
             for (col = 0; col < this.mat_a.size_col; col = col + 1) begin
                 this.dut_axis_data_in.tdata = 
                     this.mat_a.data[row * this.mat_a.size_col + col];
-                
-                // TLAST
-                this.dut_axis_data_in.tlast =
-                    row == this.mat_a.size_row - 1 &&
-                    col == this.mat_a.size_col - 1;
                 
                 // Wait for clk
                 @ (posedge(this.dut_misc.clk));
@@ -221,9 +218,9 @@ class tb # (
         end
 
         // Reset used signals
-        dut_axis_data_in.tvalid = 1'b0;
-        dut_axis_data_in.tlast = 1'b0;
-        dut_axis_data_in.tdata = 'b0;
+        this.dut_axis_data_in.tvalid = 1'b0;
+        this.dut_axis_data_in.tlast = 1'b0;
+        this.dut_axis_data_in.tdata = 'b0;
 
         // Transmit Mat_B (As a Vector)
         @ (posedge(this.dut_misc.clk));
@@ -243,9 +240,9 @@ class tb # (
         end
 
         // Reset used signals
-        dut_axis_data_in.tvalid = 1'b0;
-        dut_axis_data_in.tlast = 1'b0;
-        dut_axis_data_in.tdata = 'b0;
+        this.dut_axis_data_in.tvalid = 1'b0;
+        this.dut_axis_data_in.tlast = 1'b0;
+        this.dut_axis_data_in.tdata = 'b0;
     endtask
 
     task read_data();
@@ -310,9 +307,7 @@ endclass
 /* Modules */
 // DUT Wrapper to use Interface
 module dut_wrapper # (
-    parameter integer CTRL_STAT_AXIS_DATA_WIDTH = 32,
-    parameter integer PAYLOAD_AXIS_DATA_WIDTH = 32,
-
+    parameter integer CTRL_DATA_WIDTH = 32,
     parameter integer WORD_WIDTH = 32,
     parameter integer FRAC_BITS = 0,
     parameter integer MAT_MAX_ROW = 64,
@@ -326,8 +321,7 @@ module dut_wrapper # (
 );
     // Assign Interface Signals to DUT
     mat_mul # (
-        .CTRL_STAT_AXIS_DATA_WIDTH(CTRL_STAT_AXIS_DATA_WIDTH),
-        .PAYLOAD_AXIS_DATA_WIDTH(PAYLOAD_AXIS_DATA_WIDTH),
+        .CTRL_DATA_WIDTH(CTRL_DATA_WIDTH),
         .WORD_WIDTH(WORD_WIDTH),
         .FRAC_BITS(FRAC_BITS),
         .MAT_MAX_ROW(MAT_MAX_ROW),
@@ -370,12 +364,11 @@ module mat_mul_tb # ();
 
     // DUT Module Instance
     dut_wrapper # (
-        .CTRL_STAT_AXIS_DATA_WIDTH(32),
-        .PAYLOAD_AXIS_DATA_WIDTH(32),
+        .CTRL_DATA_WIDTH(32),
         .WORD_WIDTH(32),
-        .FRAC_BITS(0),
-        .MAT_MAX_ROW(64),
-        .MAT_MAX_COL(128)
+        .FRAC_BITS(8),
+        .MAT_MAX_ROW(128),
+        .MAT_MAX_COL(270)
     ) DUT (
         .misc_if(dut_misc),
         .ctrl_if(dut_axis_ctrl),
@@ -388,7 +381,7 @@ module mat_mul_tb # ();
     tb # (
         .CTRL_STAT_AXIS_DATA_WIDTH(32),
         .PAYLOAD_AXIS_DATA_WIDTH(32),
-        .FRAC_BITS(0)
+        .FRAC_BITS(8)
     ) tb_inst;
 
     // 100Mhz testbench clock
@@ -420,7 +413,7 @@ module mat_mul_tb # ();
 
         repeat (2) begin
             // Initialize Test Data
-            tb_inst.init(64, 128);
+            tb_inst.init(128, 256);
 
             // Transmit Ctrl
             tb_inst.load_ctrl();
@@ -441,6 +434,55 @@ module mat_mul_tb # ();
                 $display("helvete");
             end
         end
+
+        repeat (2) begin
+            // Initialize Test Data
+            tb_inst.init(16, 32);
+
+            // Transmit Ctrl
+            tb_inst.load_ctrl();
+
+            // Transmit Data
+            tb_inst.load_data();
+
+            // Read Data
+            tb_inst.read_data();
+
+            // Read Status
+            tb_inst.read_stat();
+
+            // Check Result
+            if (tb_inst.verify_data()) begin
+                $display("Fika approved");
+            end else begin
+                $display("helvete");
+            end
+        end
+
+        repeat (10) begin
+            // Initialize Test Data
+            tb_inst.init(3, 5);
+
+            // Transmit Ctrl
+            tb_inst.load_ctrl();
+
+            // Transmit Data
+            tb_inst.load_data();
+
+            // Read Data
+            tb_inst.read_data();
+
+            // Read Status
+            tb_inst.read_stat();
+
+            // Check Result
+            if (tb_inst.verify_data()) begin
+                $display("Fika approved");
+            end else begin
+                $display("helvete");
+            end
+        end
+
         // Some extra cycles
         repeat (128) begin
             @ (posedge(clk));

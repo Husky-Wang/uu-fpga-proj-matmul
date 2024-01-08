@@ -235,9 +235,7 @@ endmodule
 
 // Accelerator Top Unit
 module mat_mul # (
-    parameter integer CTRL_STAT_AXIS_DATA_WIDTH = 32,
-    parameter integer PAYLOAD_AXIS_DATA_WIDTH = 32,
-
+    parameter integer CTRL_DATA_WIDTH = 32,
     parameter integer WORD_WIDTH = 32,
     parameter integer FRAC_BITS = 0,
     parameter integer MAT_MAX_ROW = 64,
@@ -251,29 +249,29 @@ module mat_mul # (
     output wire ctrl_axis_tready,
     input wire ctrl_axis_tvalid,
     input wire ctrl_axis_tlast,
-    input wire [CTRL_STAT_AXIS_DATA_WIDTH - 1 : 0] ctrl_axis_tdata,
+    input wire [CTRL_DATA_WIDTH - 1 : 0] ctrl_axis_tdata,
         
     // AXI-Stream Status Interface
     input wire stat_axis_tready,
     output wire stat_axis_tvalid,
     output wire stat_axis_tlast,
-    output wire [CTRL_STAT_AXIS_DATA_WIDTH - 1 : 0] stat_axis_tdata,
+    output wire [CTRL_DATA_WIDTH - 1 : 0] stat_axis_tdata,
 
     // AXI-Stream Slave Payload Interface
     output wire in_axis_tready,
     input wire in_axis_tvalid,
     input wire in_axis_tlast,
-    input wire [PAYLOAD_AXIS_DATA_WIDTH - 1 : 0] in_axis_tdata,
+    input wire [WORD_WIDTH - 1 : 0] in_axis_tdata,
         
     // AXI-Stream Master Payload Interface
     input wire out_axis_tready,
     output wire out_axis_tvalid,
     output wire out_axis_tlast,
-    output wire [PAYLOAD_AXIS_DATA_WIDTH - 1 : 0] out_axis_tdata
+    output wire [WORD_WIDTH - 1 : 0] out_axis_tdata
 );
 
-    wire [CTRL_STAT_AXIS_DATA_WIDTH - 1 : 0] mat_row_size;
-    wire [CTRL_STAT_AXIS_DATA_WIDTH - 1 : 0] mat_col_size;
+    wire [CTRL_DATA_WIDTH - 1 : 0] mat_row_size;
+    wire [CTRL_DATA_WIDTH - 1 : 0] mat_col_size;
     wire [1 : 0] err;
     wire [$clog2(MAT_MAX_ROW * MAT_MAX_COL) - 1 : 0] addr_a;
     wire [$clog2(MAT_MAX_COL) - 1 : 0] addr_b;
@@ -285,7 +283,7 @@ module mat_mul # (
         mac_clear;
 
     axis_ctrl_if # (
-        .AXIS_DATA_WIDTH(CTRL_STAT_AXIS_DATA_WIDTH)
+        .AXIS_DATA_WIDTH(CTRL_DATA_WIDTH)
     ) axis_ctrl_inst (
         .clk(clk),
         .anrst(anrst),
