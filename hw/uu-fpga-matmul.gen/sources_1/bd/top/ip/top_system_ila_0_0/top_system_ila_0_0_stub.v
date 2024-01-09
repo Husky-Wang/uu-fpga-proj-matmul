@@ -2,10 +2,10 @@
 // Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2023.1 (lin64) Build 3865809 Sun May  7 15:04:56 MDT 2023
-// Date        : Mon Jan  8 05:23:49 2024
+// Date        : Mon Jan  8 16:21:29 2024
 // Host        : husky-laptop-devel running 64-bit unknown
-// Command     : write_verilog -force -mode synth_stub -rename_top top_system_ila_0_0 -prefix
-//               top_system_ila_0_0_ top_system_ila_0_0_stub.v
+// Command     : write_verilog -force -mode synth_stub
+//               /localstorage/Temporary/UU/Embedded/FPGA/repo/uu-fpga-matmul/hw/uu-fpga-matmul.gen/sources_1/bd/top/ip/top_system_ila_0_0/top_system_ila_0_0_stub.v
 // Design      : top_system_ila_0_0
 // Purpose     : Stub declaration of top-level module interface
 // Device      : xc7z007sclg225-1

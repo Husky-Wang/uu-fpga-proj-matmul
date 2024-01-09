@@ -58,6 +58,8 @@
  * ***************************************************************************
  */
 /***************************** Include Files *********************************/
+#include "fixed_point.h"
+#include "stdio.h"
 #include "xaxidma.h"
 #include "xparameters.h"
 #include "xdebug.h"
@@ -83,13 +85,7 @@ extern void xil_printf(const char *format, ...);
 
 #define DMA_DEV_ID		XPAR_AXIDMA_0_DEVICE_ID
 
-#ifndef DDR_BASE_ADDR
-#warning CHECK FOR THE VALID DDR ADDRESS IN XPARAMETERS.H, \
-			DEFAULT SET TO 0x01000000
 #define MEM_BASE_ADDR		0x01000000
-#else
-#define MEM_BASE_ADDR		(DDR_BASE_ADDR + 0x1000000)
-#endif
 
 #define TX_BD_SPACE_BASE	(MEM_BASE_ADDR)
 #define TX_BD_SPACE_HIGH	(MEM_BASE_ADDR + 0x00000FFF)
@@ -100,7 +96,7 @@ extern void xil_printf(const char *format, ...);
 #define RX_BUFFER_HIGH		(MEM_BASE_ADDR + 0x004FFFFF)
 
 
-#define MAX_PKT_LEN		168
+#define MAX_PKT_LEN		132096
 
 #define TEST_START_VALUE	0xC
 #define POLL_TIMEOUT_COUNTER	1000000U
@@ -319,6 +315,14 @@ static int RxSetup(XAxiDma * AxiDmaInstPtr)
 	 */
 	memset((void *)RX_BUFFER_BASE, 0, MAX_PKT_LEN);
 
+	/* Start RX DMA channel */
+		Status = XAxiDma_BdRingStart(RxRingPtr);
+		if (Status != XST_SUCCESS) {
+			xil_printf("RX start hw failed %d\r\n", Status);
+
+			return XST_FAILURE;
+		}
+
 	Status = XAxiDma_BdRingToHw(RxRingPtr, FreeBdCount,
 						BdPtr);
 	if (Status != XST_SUCCESS) {
@@ -327,13 +331,7 @@ static int RxSetup(XAxiDma * AxiDmaInstPtr)
 		return XST_FAILURE;
 	}
 
-	/* Start RX DMA channel */
-	Status = XAxiDma_BdRingStart(RxRingPtr);
-	if (Status != XST_SUCCESS) {
-		xil_printf("RX start hw failed %d\r\n", Status);
 
-		return XST_FAILURE;
-	}
 
 	return XST_SUCCESS;
 }
@@ -421,8 +419,7 @@ static int TxSetup(XAxiDma * AxiDmaInstPtr)
 static int SendPacket(XAxiDma * AxiDmaInstPtr)
 {
 	XAxiDma_BdRing *TxRingPtr;
-	u8 *TxPacket;
-	u8 Value;
+	fixed_8_24_t *TxPacket;\
 	XAxiDma_Bd *BdPtr;
 	int Status;
 	int Index;
@@ -430,14 +427,11 @@ static int SendPacket(XAxiDma * AxiDmaInstPtr)
 	TxRingPtr = XAxiDma_GetTxRing(AxiDmaInstPtr);
 
 	/* Create pattern in the packet to transmit */
-	TxPacket = (u8 *) Packet;
+	TxPacket = (fixed_8_24_t *) Packet;
 
-	Value = TEST_START_VALUE;
-
-	for(Index = 0; Index < MAX_PKT_LEN; Index ++) {
-		TxPacket[Index] = Value;
-
-		Value = (Value + 1) & 0xFF;
+	for(Index = 0; Index < MAX_PKT_LEN / sizeof(fixed_8_24_t); Index ++) {
+		TxPacket[Index] = float_to_fixed_8_24(((float)((rand() % 40) - 20)) / 10.0f);
+		//printf("Src %d: %f\n", Index, fixed_8_24_to_float(TxPacket[Index]));
 	}
 
 	/* Flush the buffers before the DMA transfer, in case the Data Cache
@@ -471,9 +465,9 @@ static int SendPacket(XAxiDma * AxiDmaInstPtr)
 	}
 
 	// rows
-	Status = XAxiDma_BdSetAppWord(BdPtr, 3, 5);
+	Status = XAxiDma_BdSetAppWord(BdPtr, 3, 128);
 	// cols
-	Status = XAxiDma_BdSetAppWord(BdPtr, 4, 7);
+	Status = XAxiDma_BdSetAppWord(BdPtr, 4, 256);
 
 	/* If Set app length failed, it is not fatal
 	 */
@@ -515,28 +509,19 @@ static int SendPacket(XAxiDma * AxiDmaInstPtr)
 ******************************************************************************/
 static int CheckData(void)
 {
-	u8 *RxPacket;
+	fixed_8_24_t *RxPacket;
 	int Index = 0;
-	u8 Value;
 
 
-	RxPacket = (u8 *) RX_BUFFER_BASE;
-	Value = TEST_START_VALUE;
+	RxPacket = (fixed_8_24_t *) RX_BUFFER_BASE;
 
 	/* Invalidate the DestBuffer before receiving the data, in case the
 	 * Data Cache is enabled
 	 */
 	Xil_DCacheInvalidateRange((UINTPTR)RxPacket, MAX_PKT_LEN);
 
-	for(Index = 0; Index < MAX_PKT_LEN; Index++) {
-		if (RxPacket[Index] != Value) {
-			xil_printf("Data error %d: %x/%x\r\n",
-			    Index, (unsigned int)RxPacket[Index],
-			    (unsigned int)Value);
-
-			return XST_FAILURE;
-		}
-		Value = (Value + 1) & 0xFF;
+	for(Index = 0; Index < /*MAX_PKT_LEN / sizeof(fixed_8_24_t)*/ 256; Index++) {
+		printf("Dest %d: %f\n", Index, fixed_8_24_to_float(RxPacket[Index]));
 	}
 
 	return XST_SUCCESS;

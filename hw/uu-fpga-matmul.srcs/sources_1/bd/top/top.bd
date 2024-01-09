@@ -1538,7 +1538,7 @@
             "value": "32"
           },
           "c_sg_length_width": {
-            "value": "16"
+            "value": "18"
           },
           "c_sg_use_stsapp_length": {
             "value": "0"
@@ -1784,6 +1784,9 @@
         "xci_path": "ip/top_system_ila_0_0/top_system_ila_0_0.xci",
         "inst_hier_path": "system_ila_0",
         "parameters": {
+          "C_DATA_DEPTH": {
+            "value": "2048"
+          },
           "C_MON_TYPE": {
             "value": "MIX"
           },

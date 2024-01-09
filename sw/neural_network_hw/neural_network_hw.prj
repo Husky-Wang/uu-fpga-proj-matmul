@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="ASCII"?>
+<sdkproject:SdkProject xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:sdkproject="http://www.xilinx.com/sdkproject" name="neural_network_hw" location="/localstorage/Temporary/UU/Embedded/FPGA/repo/uu-fpga-matmul/sw/neural_network_hw" platform="/localstorage/Temporary/UU/Embedded/FPGA/repo/uu-fpga-matmul/sw/top_wrapper/export/top_wrapper/top_wrapper.xpfm" platformUID="xilinx:minized::0.0(custom)" systemProject="neural_network_hw_system" sysConfig="top_wrapper" runtime="C/C++" cpu="standalone_domain" cpuInstance="ps7_cortexa9_0" os="standalone" mssSignature="494ef4ae52a71cb7a04ab4838cac1e1f">
+  <configuration name="Debug" id="xilinx.gnu.armv7.exe.debug.1381537454">
+    <configBuildOptions xsi:type="sdkproject:SdkOptions"/>
+    <lastBuildOptions xsi:type="sdkproject:SdkOptions"/>
+  </configuration>
+  <configuration name="Release" id="xilinx.gnu.armv7.exe.release.840176790" dirty="true">
+    <configBuildOptions xsi:type="sdkproject:SdkOptions"/>
+  </configuration>
+  <template appTemplateName="hello_world"/>
+</sdkproject:SdkProject>

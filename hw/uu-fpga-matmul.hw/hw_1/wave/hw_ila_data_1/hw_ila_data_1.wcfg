@@ -10,16 +10,14 @@
    </db_ref_list>
    <zoom_setting>
       <ZoomStartTime time="0"></ZoomStartTime>
-      <ZoomEndTime time="69"></ZoomEndTime>
-      <Cursor1Time time="108"></Cursor1Time>
+      <ZoomEndTime time="8"></ZoomEndTime>
+      <Cursor1Time time="0"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
-      <NameColumnWidth column_width="442"></NameColumnWidth>
-      <ValueColumnWidth column_width="102"></ValueColumnWidth>
+      <NameColumnWidth column_width="408"></NameColumnWidth>
+      <ValueColumnWidth column_width="88"></ValueColumnWidth>
    </column_width_setting>
    <WVObjectSize size="6" />
-   <wave_markers>
-   </wave_markers>
    <wvobject type="logic" fp_name="top_i/system_ila_0/inst/probe0_1">
       <obj_property name="DisplayName">FullPathName</obj_property>
       <obj_property name="ElementShortName">top_i/system_ila_0/inst/probe0_1</obj_property>
@@ -85,7 +83,7 @@
             <obj_property name="ElementShortName">top_i/system_ila_0/inst/net_slot_0_axis_tdata[31:0]</obj_property>
             <obj_property name="ObjectShortName">net_slot_0_axis_tdata[31:0]</obj_property>
             <obj_property name="label">slot_0 : axi_dma_0_M_AXIS_CNTRL : TDATA</obj_property>
-            <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
             <obj_property name="LABELRADIX">true</obj_property>
             <obj_property name="WaveformStyle">STYLE_DIGITAL</obj_property>
          </wvobject>
@@ -106,7 +104,7 @@
       <obj_property name="Detail_Data">Interface_(i1:s1)_(mat_mul_0_stat_axis)_tooltip</obj_property>
       <obj_property name="Render_Data">Interface_(i1:s1)_(mat_mul_0_stat_axis)</obj_property>
       <obj_property name="EnumTransactionColorTable">0=blank</obj_property>
-      <obj_property name="CustomSignalColor">OliveDrab</obj_property>
+      <obj_property name="CustomSignalColor">Cornsilk</obj_property>
       <obj_property name="UseCustomSignalColor">true</obj_property>
       <obj_property name="WaveformStyle">STYLE_ENUM_TRANSACTION</obj_property>
       <obj_property name="isExpanded"></obj_property>
@@ -149,9 +147,9 @@
             <obj_property name="ElementShortName">top_i/system_ila_0/inst/net_slot_1_axis_tdata[31:0]</obj_property>
             <obj_property name="ObjectShortName">net_slot_1_axis_tdata[31:0]</obj_property>
             <obj_property name="label">slot_1 : mat_mul_0_stat_axis : TDATA</obj_property>
-            <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
             <obj_property name="LABELRADIX">true</obj_property>
             <obj_property name="WaveformStyle">STYLE_DIGITAL</obj_property>
+            <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
          </wvobject>
       </wvobject>
    </wvobject>
@@ -225,7 +223,7 @@
       <obj_property name="Detail_Data">Interface_(i1:s3)_(mat_mul_0_out_axis)_tooltip</obj_property>
       <obj_property name="Render_Data">Interface_(i1:s3)_(mat_mul_0_out_axis)</obj_property>
       <obj_property name="EnumTransactionColorTable">0=blank</obj_property>
-      <obj_property name="CustomSignalColor">OliveDrab</obj_property>
+      <obj_property name="CustomSignalColor">Cornsilk</obj_property>
       <obj_property name="UseCustomSignalColor">true</obj_property>
       <obj_property name="WaveformStyle">STYLE_ENUM_TRANSACTION</obj_property>
       <obj_property name="isExpanded"></obj_property>

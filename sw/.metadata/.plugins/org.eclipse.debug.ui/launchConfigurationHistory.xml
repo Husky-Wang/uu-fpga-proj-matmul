@@ -22,6 +22,8 @@
     </launchGroup>
     <launchGroup id="com.xilinx.ide.launchGroup.emb.debug">
         <mruHistory>
+            <launch memento="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?&gt;&#10;&lt;launchConfiguration local=&quot;false&quot; path=&quot;/neural_network_hw/_ide/launch/Debugger_neural_network_hw-GDB.launch&quot;/&gt;&#10;"/>
+            <launch memento="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?&gt;&#10;&lt;launchConfiguration local=&quot;false&quot; path=&quot;/mat_mul/_ide/launch/Debugger_mat_mul-GDB.launch&quot;/&gt;&#10;"/>
             <launch memento="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?&gt;&#10;&lt;launchConfiguration local=&quot;false&quot; path=&quot;/xaxidma_example_sg_poll_1/_ide/launch/Debugger_xaxidma_example_sg_poll_1-GDB.launch&quot;/&gt;&#10;"/>
         </mruHistory>
         <favorites/>
@@ -32,6 +34,8 @@
     </launchGroup>
     <launchGroup id="org.eclipse.debug.ui.launchGroup.run">
         <mruHistory>
+            <launch memento="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?&gt;&#10;&lt;launchConfiguration local=&quot;false&quot; path=&quot;/neural_network_hw/_ide/launch/Debugger_neural_network_hw-GDB.launch&quot;/&gt;&#10;"/>
+            <launch memento="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?&gt;&#10;&lt;launchConfiguration local=&quot;false&quot; path=&quot;/mat_mul/_ide/launch/Debugger_mat_mul-GDB.launch&quot;/&gt;&#10;"/>
             <launch memento="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?&gt;&#10;&lt;launchConfiguration local=&quot;false&quot; path=&quot;/xaxidma_example_sg_poll_1/_ide/launch/Debugger_xaxidma_example_sg_poll_1-GDB.launch&quot;/&gt;&#10;"/>
         </mruHistory>
         <favorites/>
@@ -70,24 +74,32 @@
     </launchGroup>
     <launchGroup id="com.xilinx.ide.launchGroup.bm.vpprun">
         <mruHistory>
+            <launch memento="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?&gt;&#10;&lt;launchConfiguration local=&quot;false&quot; path=&quot;/neural_network_hw/_ide/launch/Debugger_neural_network_hw-GDB.launch&quot;/&gt;&#10;"/>
+            <launch memento="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?&gt;&#10;&lt;launchConfiguration local=&quot;false&quot; path=&quot;/mat_mul/_ide/launch/Debugger_mat_mul-GDB.launch&quot;/&gt;&#10;"/>
             <launch memento="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?&gt;&#10;&lt;launchConfiguration local=&quot;false&quot; path=&quot;/xaxidma_example_sg_poll_1/_ide/launch/Debugger_xaxidma_example_sg_poll_1-GDB.launch&quot;/&gt;&#10;"/>
         </mruHistory>
         <favorites/>
     </launchGroup>
     <launchGroup id="com.xilinx.ide.launchGroup.bm.vppdebug">
         <mruHistory>
+            <launch memento="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?&gt;&#10;&lt;launchConfiguration local=&quot;false&quot; path=&quot;/neural_network_hw/_ide/launch/Debugger_neural_network_hw-GDB.launch&quot;/&gt;&#10;"/>
+            <launch memento="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?&gt;&#10;&lt;launchConfiguration local=&quot;false&quot; path=&quot;/mat_mul/_ide/launch/Debugger_mat_mul-GDB.launch&quot;/&gt;&#10;"/>
             <launch memento="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?&gt;&#10;&lt;launchConfiguration local=&quot;false&quot; path=&quot;/xaxidma_example_sg_poll_1/_ide/launch/Debugger_xaxidma_example_sg_poll_1-GDB.launch&quot;/&gt;&#10;"/>
         </mruHistory>
         <favorites/>
     </launchGroup>
     <launchGroup id="org.eclipse.debug.ui.launchGroup.debug">
         <mruHistory>
+            <launch memento="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?&gt;&#10;&lt;launchConfiguration local=&quot;false&quot; path=&quot;/neural_network_hw/_ide/launch/Debugger_neural_network_hw-GDB.launch&quot;/&gt;&#10;"/>
+            <launch memento="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?&gt;&#10;&lt;launchConfiguration local=&quot;false&quot; path=&quot;/mat_mul/_ide/launch/Debugger_mat_mul-GDB.launch&quot;/&gt;&#10;"/>
             <launch memento="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?&gt;&#10;&lt;launchConfiguration local=&quot;false&quot; path=&quot;/xaxidma_example_sg_poll_1/_ide/launch/Debugger_xaxidma_example_sg_poll_1-GDB.launch&quot;/&gt;&#10;"/>
         </mruHistory>
         <favorites/>
     </launchGroup>
     <launchGroup id="com.xilinx.ide.launchGroup.emb.run">
         <mruHistory>
+            <launch memento="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?&gt;&#10;&lt;launchConfiguration local=&quot;false&quot; path=&quot;/neural_network_hw/_ide/launch/Debugger_neural_network_hw-GDB.launch&quot;/&gt;&#10;"/>
+            <launch memento="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?&gt;&#10;&lt;launchConfiguration local=&quot;false&quot; path=&quot;/mat_mul/_ide/launch/Debugger_mat_mul-GDB.launch&quot;/&gt;&#10;"/>
             <launch memento="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?&gt;&#10;&lt;launchConfiguration local=&quot;false&quot; path=&quot;/xaxidma_example_sg_poll_1/_ide/launch/Debugger_xaxidma_example_sg_poll_1-GDB.launch&quot;/&gt;&#10;"/>
         </mruHistory>
         <favorites/>

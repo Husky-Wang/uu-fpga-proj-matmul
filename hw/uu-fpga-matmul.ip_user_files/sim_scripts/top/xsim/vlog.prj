@@ -56,10 +56,10 @@ sv xil_defaultlib --include "/tools/Xilinx/Vivado/2023.1/data/xilinx_vip/include
 verilog xil_defaultlib --include "/tools/Xilinx/Vivado/2023.1/data/xilinx_vip/include" --include "../../../../uu-fpga-matmul.gen/sources_1/bd/top/ipshared/ec67/hdl" --include "../../../../uu-fpga-matmul.gen/sources_1/bd/top/ipshared/aed8/hdl" --include "../../../../uu-fpga-matmul.gen/sources_1/bd/top/ipshared/f0b6/hdl/verilog" --include "../../../../uu-fpga-matmul.gen/sources_1/bd/top/ipshared/66be/hdl/verilog" --include "../../../../uu-fpga-matmul.gen/sources_1/bd/top/ipshared/1b7e/hdl/verilog" --include "../../../../uu-fpga-matmul.gen/sources_1/bd/top/ipshared/122e/hdl/verilog" --include "../../../../uu-fpga-matmul.gen/sources_1/bd/top/ipshared/affe/hdl/verilog" --include "../../../../uu-fpga-matmul.gen/sources_1/bd/top/ipshared/20d0/hdl/verilog" \
 "../../../bd/top/ip/top_smartconnect_0_2/sim/top_smartconnect_0_2.v" \
 "../../../bd/top/ip/top_mat_mul_0_0/sim/top_mat_mul_0_0.v" \
-"../../../bd/top/ip/top_system_ila_0_0/bd_0/sim/bd_0696.v" \
 "../../../bd/top/ip/top_system_ila_0_0/bd_0/ip/ip_0/sim/bd_0696_ila_lib_0.v" \
 "../../../bd/top/ip/top_system_ila_0_0/bd_0/ip/ip_1/bd_0696_g_inst_0_gigantic_mux.v" \
 "../../../bd/top/ip/top_system_ila_0_0/bd_0/ip/ip_1/sim/bd_0696_g_inst_0.v" \
+"../../../bd/top/ip/top_system_ila_0_0/bd_0/sim/bd_0696.v" \
 "../../../bd/top/ip/top_system_ila_0_0/sim/top_system_ila_0_0.v" \
 "../../../bd/top/sim/top.v" \
 

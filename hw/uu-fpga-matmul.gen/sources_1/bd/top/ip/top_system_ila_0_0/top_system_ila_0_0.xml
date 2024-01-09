@@ -797,11 +797,11 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>GENtimestamp</spirit:name>
-            <spirit:value>Mon Jan 08 04:57:04 UTC 2024</spirit:value>
+            <spirit:value>Mon Jan 08 15:20:07 UTC 2024</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>outputProductCRC</spirit:name>
-            <spirit:value>9:8dbd8f14</spirit:value>
+            <spirit:value>9:7ee88133</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -815,11 +815,11 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>GENtimestamp</spirit:name>
-            <spirit:value>Mon Jan 08 04:51:32 UTC 2024</spirit:value>
+            <spirit:value>Mon Jan 08 15:19:44 UTC 2024</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>outputProductCRC</spirit:name>
-            <spirit:value>9:11c0f0b5</spirit:value>
+            <spirit:value>9:32c348b1</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -833,11 +833,11 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>GENtimestamp</spirit:name>
-            <spirit:value>Mon Jan 08 03:19:04 UTC 2024</spirit:value>
+            <spirit:value>Mon Jan 08 15:19:42 UTC 2024</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>outputProductCRC</spirit:name>
-            <spirit:value>9:7b0a220d</spirit:value>
+            <spirit:value>9:7629d483</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -851,11 +851,11 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>GENtimestamp</spirit:name>
-            <spirit:value>Mon Jan 08 04:57:13 UTC 2024</spirit:value>
+            <spirit:value>Mon Jan 08 15:21:30 UTC 2024</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>outputProductCRC</spirit:name>
-            <spirit:value>9:8dbd8f14</spirit:value>
+            <spirit:value>9:7ee88133</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -870,11 +870,11 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>GENtimestamp</spirit:name>
-            <spirit:value>Mon Jan 08 04:57:04 UTC 2024</spirit:value>
+            <spirit:value>Mon Jan 08 15:20:07 UTC 2024</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>outputProductCRC</spirit:name>
-            <spirit:value>9:8dbd8f14</spirit:value>
+            <spirit:value>9:7ee88133</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -887,7 +887,7 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>outputProductCRC</spirit:name>
-            <spirit:value>9:e52c0f47</spirit:value>
+            <spirit:value>9:8b5ba3c8</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>sim_type</spirit:name>
@@ -907,11 +907,11 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>GENtimestamp</spirit:name>
-            <spirit:value>Mon Jan 08 04:44:03 UTC 2024</spirit:value>
+            <spirit:value>Mon Jan 08 15:20:07 UTC 2024</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>outputProductCRC</spirit:name>
-            <spirit:value>9:e52c0f47</spirit:value>
+            <spirit:value>9:8b5ba3c8</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>sim_type</spirit:name>
@@ -931,11 +931,11 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>GENtimestamp</spirit:name>
-            <spirit:value>Mon Jan 08 04:57:04 UTC 2024</spirit:value>
+            <spirit:value>Mon Jan 08 15:20:07 UTC 2024</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>outputProductCRC</spirit:name>
-            <spirit:value>9:8dbd8f14</spirit:value>
+            <spirit:value>9:7ee88133</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -2490,20 +2490,6 @@
     <spirit:fileSet>
       <spirit:name>xilinx_externalfiles_view_fileset</spirit:name>
       <spirit:file>
-        <spirit:name>top_system_ila_0_0_sim_netlist.v</spirit:name>
-        <spirit:fileType>verilogSource</spirit:fileType>
-        <spirit:userFileType>USED_IN_simulation</spirit:userFileType>
-        <spirit:userFileType>USED_IN_single_language</spirit:userFileType>
-        <spirit:logicalName>xil_defaultlib</spirit:logicalName>
-      </spirit:file>
-      <spirit:file>
-        <spirit:name>top_system_ila_0_0_sim_netlist.vhdl</spirit:name>
-        <spirit:fileType>vhdlSource</spirit:fileType>
-        <spirit:userFileType>USED_IN_simulation</spirit:userFileType>
-        <spirit:userFileType>USED_IN_single_language</spirit:userFileType>
-        <spirit:logicalName>xil_defaultlib</spirit:logicalName>
-      </spirit:file>
-      <spirit:file>
         <spirit:name>top_system_ila_0_0.dcp</spirit:name>
         <spirit:userFileType>dcp</spirit:userFileType>
         <spirit:userFileType>USED_IN_implementation</spirit:userFileType>
@@ -2520,6 +2506,20 @@
         <spirit:name>top_system_ila_0_0_stub.vhdl</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
         <spirit:userFileType>USED_IN_synth_blackbox_stub</spirit:userFileType>
+        <spirit:logicalName>xil_defaultlib</spirit:logicalName>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>top_system_ila_0_0_sim_netlist.v</spirit:name>
+        <spirit:fileType>verilogSource</spirit:fileType>
+        <spirit:userFileType>USED_IN_simulation</spirit:userFileType>
+        <spirit:userFileType>USED_IN_single_language</spirit:userFileType>
+        <spirit:logicalName>xil_defaultlib</spirit:logicalName>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>top_system_ila_0_0_sim_netlist.vhdl</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+        <spirit:userFileType>USED_IN_simulation</spirit:userFileType>
+        <spirit:userFileType>USED_IN_single_language</spirit:userFileType>
         <spirit:logicalName>xil_defaultlib</spirit:logicalName>
       </spirit:file>
     </spirit:fileSet>
@@ -30399,7 +30399,7 @@
     <spirit:parameter>
       <spirit:name>C_DATA_DEPTH</spirit:name>
       <spirit:displayName>Sample Data Depth</spirit:displayName>
-      <spirit:value spirit:format="long" spirit:resolve="user" spirit:id="PARAM_VALUE.C_DATA_DEPTH" spirit:choiceRef="choice_list_d4fc98f8" spirit:order="10800" spirit:configGroups="1 UnGrouped">1024</spirit:value>
+      <spirit:value spirit:format="long" spirit:resolve="user" spirit:id="PARAM_VALUE.C_DATA_DEPTH" spirit:choiceRef="choice_list_d4fc98f8" spirit:order="10800" spirit:configGroups="1 UnGrouped">2048</spirit:value>
       <spirit:vendorExtensions>
         <xilinx:parameterInfo>
           <xilinx:enablement>
@@ -36848,6 +36848,7 @@
         <xilinx:configElementInfo xilinx:referenceId="BUSIFPARAM_VALUE.SLOT_3_AXIS.TDEST_WIDTH" xilinx:valuePermission="bd"/>
         <xilinx:configElementInfo xilinx:referenceId="BUSIFPARAM_VALUE.SLOT_3_AXIS.TID_WIDTH" xilinx:valuePermission="bd"/>
         <xilinx:configElementInfo xilinx:referenceId="BUSIFPARAM_VALUE.SLOT_3_AXIS.TUSER_WIDTH" xilinx:valuePermission="bd"/>
+        <xilinx:configElementInfo xilinx:referenceId="PARAM_VALUE.C_DATA_DEPTH" xilinx:valueSource="user"/>
         <xilinx:configElementInfo xilinx:referenceId="PARAM_VALUE.C_MON_TYPE" xilinx:valueSource="user"/>
         <xilinx:configElementInfo xilinx:referenceId="PARAM_VALUE.C_NUM_MONITOR_SLOTS" xilinx:valueSource="user"/>
         <xilinx:configElementInfo xilinx:referenceId="PARAM_VALUE.C_NUM_OF_PROBES" xilinx:valueSource="user"/>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<item key="neural_network_hw_system-imgFile" value="/localstorage/Temporary/UU/Embedded/FPGA/repo/uu-fpga-matmul/sw/neural_network_hw_system/_ide/bootimage/BOOT.mcs"/>
+	<item key="neural_network_hw_system-offSet" value=""/>
+	<item key="neural_network_hw_system-initFile" value="/localstorage/Temporary/UU/Embedded/FPGA/repo/uu-fpga-matmul/sw/top_wrapper/export/top_wrapper/sw/top_wrapper/boot/fsbl.elf"/>
+	<item key="neural_network_hw_system-flashType" value="qspi-x4-single"/>
+	<item key="neural_network_hw_system-verifyFlash" value="true"/>
+	<item key="neural_network_hw_system-blankCheck" value="true"/>
+	<item key="neural_network_hw_system-device" value="Auto Detect"/>
+	<item key="neural_network_hw_system-target" value="Local"/>
+	<item key="programflash.hwplatform" value="neural_network_hw_system"/>
+</section>
