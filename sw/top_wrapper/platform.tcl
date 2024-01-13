@@ -67,3 +67,5 @@ platform generate -domains
 platform generate -domains standalone_domain,zynq_fsbl 
 platform clean
 platform generate
+platform clean
+platform generate

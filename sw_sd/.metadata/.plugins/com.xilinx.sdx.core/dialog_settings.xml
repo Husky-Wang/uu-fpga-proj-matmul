@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<item key="sdx.custom.platform.repository.locations" value="/localstorage/Temporary/UU/Embedded/FPGA/repo/uu-fpga-matmul/sw_sd/top_wrapper_sd/export/top_wrapper_sd;/localstorage/Temporary/UU/Embedded/FPGA/repo/uu-fpga-proj-matmul/sw_sd/top_wrapper_sd/export/top_wrapper_sd"/>
+</section>

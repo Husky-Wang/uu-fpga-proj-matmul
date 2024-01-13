@@ -1,0 +1,69 @@
+verilog xil_defaultlib --include "/tools/Xilinx/Vivado/2023.1/data/xilinx_vip/include" --include "../../../../uu-fpga-matmul.gen/sources_1/bd/top/ipshared/f0b6/hdl/verilog" --include "../../../../uu-fpga-matmul.gen/sources_1/bd/top/ipshared/66be/hdl/verilog" --include "../../../../uu-fpga-matmul.gen/sources_1/bd/top/ipshared/ec67/hdl" --include "../../../../uu-fpga-matmul.gen/sources_1/bd/top/ipshared/1b7e/hdl/verilog" --include "../../../../uu-fpga-matmul.gen/sources_1/bd/top/ipshared/122e/hdl/verilog" --include "../../../../uu-fpga-matmul.gen/sources_1/bd/top/ipshared/affe/hdl/verilog" --include "../../../../uu-fpga-matmul.gen/sources_1/bd/top/ipshared/20d0/hdl/verilog" --include "../../../../uu-fpga-matmul.gen/sources_1/bd/top/ipshared/aed8/hdl" \
+"../../../bd/top/ip/top_mat_mul_0_0/sim/top_mat_mul_0_0.v" \
+"../../../bd/top/ip/top_smartconnect_0_0/bd_0/ip/ip_0/sim/bd_acc6_one_0.v" \
+
+sv xil_defaultlib --include "/tools/Xilinx/Vivado/2023.1/data/xilinx_vip/include" --include "../../../../uu-fpga-matmul.gen/sources_1/bd/top/ipshared/f0b6/hdl/verilog" --include "../../../../uu-fpga-matmul.gen/sources_1/bd/top/ipshared/66be/hdl/verilog" --include "../../../../uu-fpga-matmul.gen/sources_1/bd/top/ipshared/ec67/hdl" --include "../../../../uu-fpga-matmul.gen/sources_1/bd/top/ipshared/1b7e/hdl/verilog" --include "../../../../uu-fpga-matmul.gen/sources_1/bd/top/ipshared/122e/hdl/verilog" --include "../../../../uu-fpga-matmul.gen/sources_1/bd/top/ipshared/affe/hdl/verilog" --include "../../../../uu-fpga-matmul.gen/sources_1/bd/top/ipshared/20d0/hdl/verilog" --include "../../../../uu-fpga-matmul.gen/sources_1/bd/top/ipshared/aed8/hdl" \
+"../../../bd/top/ip/top_smartconnect_0_0/bd_0/ip/ip_2/sim/bd_acc6_s00mmu_0.sv" \
+"../../../bd/top/ip/top_smartconnect_0_0/bd_0/ip/ip_3/sim/bd_acc6_s00tr_0.sv" \
+"../../../bd/top/ip/top_smartconnect_0_0/bd_0/ip/ip_4/sim/bd_acc6_s00sic_0.sv" \
+"../../../bd/top/ip/top_smartconnect_0_0/bd_0/ip/ip_5/sim/bd_acc6_s00a2s_0.sv" \
+"../../../bd/top/ip/top_smartconnect_0_0/bd_0/ip/ip_6/sim/bd_acc6_sarn_0.sv" \
+"../../../bd/top/ip/top_smartconnect_0_0/bd_0/ip/ip_7/sim/bd_acc6_srn_0.sv" \
+"../../../bd/top/ip/top_smartconnect_0_0/bd_0/ip/ip_8/sim/bd_acc6_sawn_0.sv" \
+"../../../bd/top/ip/top_smartconnect_0_0/bd_0/ip/ip_9/sim/bd_acc6_swn_0.sv" \
+"../../../bd/top/ip/top_smartconnect_0_0/bd_0/ip/ip_10/sim/bd_acc6_sbn_0.sv" \
+"../../../bd/top/ip/top_smartconnect_0_0/bd_0/ip/ip_11/sim/bd_acc6_m00s2a_0.sv" \
+"../../../bd/top/ip/top_smartconnect_0_0/bd_0/ip/ip_12/sim/bd_acc6_m00e_0.sv" \
+
+verilog xil_defaultlib --include "/tools/Xilinx/Vivado/2023.1/data/xilinx_vip/include" --include "../../../../uu-fpga-matmul.gen/sources_1/bd/top/ipshared/f0b6/hdl/verilog" --include "../../../../uu-fpga-matmul.gen/sources_1/bd/top/ipshared/66be/hdl/verilog" --include "../../../../uu-fpga-matmul.gen/sources_1/bd/top/ipshared/ec67/hdl" --include "../../../../uu-fpga-matmul.gen/sources_1/bd/top/ipshared/1b7e/hdl/verilog" --include "../../../../uu-fpga-matmul.gen/sources_1/bd/top/ipshared/122e/hdl/verilog" --include "../../../../uu-fpga-matmul.gen/sources_1/bd/top/ipshared/affe/hdl/verilog" --include "../../../../uu-fpga-matmul.gen/sources_1/bd/top/ipshared/20d0/hdl/verilog" --include "../../../../uu-fpga-matmul.gen/sources_1/bd/top/ipshared/aed8/hdl" \
+"../../../bd/top/ip/top_smartconnect_0_0/bd_0/sim/bd_acc6.v" \
+"../../../bd/top/ip/top_smartconnect_0_0/sim/top_smartconnect_0_0.v" \
+"../../../bd/top/ip/top_smartconnect_0_1/bd_0/ip/ip_0/sim/bd_6c07_one_0.v" \
+
+sv xil_defaultlib --include "/tools/Xilinx/Vivado/2023.1/data/xilinx_vip/include" --include "../../../../uu-fpga-matmul.gen/sources_1/bd/top/ipshared/f0b6/hdl/verilog" --include "../../../../uu-fpga-matmul.gen/sources_1/bd/top/ipshared/66be/hdl/verilog" --include "../../../../uu-fpga-matmul.gen/sources_1/bd/top/ipshared/ec67/hdl" --include "../../../../uu-fpga-matmul.gen/sources_1/bd/top/ipshared/1b7e/hdl/verilog" --include "../../../../uu-fpga-matmul.gen/sources_1/bd/top/ipshared/122e/hdl/verilog" --include "../../../../uu-fpga-matmul.gen/sources_1/bd/top/ipshared/affe/hdl/verilog" --include "../../../../uu-fpga-matmul.gen/sources_1/bd/top/ipshared/20d0/hdl/verilog" --include "../../../../uu-fpga-matmul.gen/sources_1/bd/top/ipshared/aed8/hdl" \
+"../../../bd/top/ip/top_smartconnect_0_1/bd_0/ip/ip_2/sim/bd_6c07_s00mmu_0.sv" \
+"../../../bd/top/ip/top_smartconnect_0_1/bd_0/ip/ip_3/sim/bd_6c07_s00tr_0.sv" \
+"../../../bd/top/ip/top_smartconnect_0_1/bd_0/ip/ip_4/sim/bd_6c07_s00sic_0.sv" \
+"../../../bd/top/ip/top_smartconnect_0_1/bd_0/ip/ip_5/sim/bd_6c07_s00a2s_0.sv" \
+"../../../bd/top/ip/top_smartconnect_0_1/bd_0/ip/ip_6/sim/bd_6c07_sarn_0.sv" \
+"../../../bd/top/ip/top_smartconnect_0_1/bd_0/ip/ip_7/sim/bd_6c07_srn_0.sv" \
+"../../../bd/top/ip/top_smartconnect_0_1/bd_0/ip/ip_8/sim/bd_6c07_sawn_0.sv" \
+"../../../bd/top/ip/top_smartconnect_0_1/bd_0/ip/ip_9/sim/bd_6c07_swn_0.sv" \
+"../../../bd/top/ip/top_smartconnect_0_1/bd_0/ip/ip_10/sim/bd_6c07_sbn_0.sv" \
+"../../../bd/top/ip/top_smartconnect_0_1/bd_0/ip/ip_11/sim/bd_6c07_m00s2a_0.sv" \
+"../../../bd/top/ip/top_smartconnect_0_1/bd_0/ip/ip_12/sim/bd_6c07_m00e_0.sv" \
+
+verilog xil_defaultlib --include "/tools/Xilinx/Vivado/2023.1/data/xilinx_vip/include" --include "../../../../uu-fpga-matmul.gen/sources_1/bd/top/ipshared/f0b6/hdl/verilog" --include "../../../../uu-fpga-matmul.gen/sources_1/bd/top/ipshared/66be/hdl/verilog" --include "../../../../uu-fpga-matmul.gen/sources_1/bd/top/ipshared/ec67/hdl" --include "../../../../uu-fpga-matmul.gen/sources_1/bd/top/ipshared/1b7e/hdl/verilog" --include "../../../../uu-fpga-matmul.gen/sources_1/bd/top/ipshared/122e/hdl/verilog" --include "../../../../uu-fpga-matmul.gen/sources_1/bd/top/ipshared/affe/hdl/verilog" --include "../../../../uu-fpga-matmul.gen/sources_1/bd/top/ipshared/20d0/hdl/verilog" --include "../../../../uu-fpga-matmul.gen/sources_1/bd/top/ipshared/aed8/hdl" \
+"../../../bd/top/ip/top_smartconnect_0_1/bd_0/sim/bd_6c07.v" \
+"../../../bd/top/ip/top_smartconnect_0_1/sim/top_smartconnect_0_1.v" \
+"../../../bd/top/ip/top_smartconnect_0_2/bd_0/ip/ip_0/sim/bd_6d47_one_0.v" \
+
+sv xil_defaultlib --include "/tools/Xilinx/Vivado/2023.1/data/xilinx_vip/include" --include "../../../../uu-fpga-matmul.gen/sources_1/bd/top/ipshared/f0b6/hdl/verilog" --include "../../../../uu-fpga-matmul.gen/sources_1/bd/top/ipshared/66be/hdl/verilog" --include "../../../../uu-fpga-matmul.gen/sources_1/bd/top/ipshared/ec67/hdl" --include "../../../../uu-fpga-matmul.gen/sources_1/bd/top/ipshared/1b7e/hdl/verilog" --include "../../../../uu-fpga-matmul.gen/sources_1/bd/top/ipshared/122e/hdl/verilog" --include "../../../../uu-fpga-matmul.gen/sources_1/bd/top/ipshared/affe/hdl/verilog" --include "../../../../uu-fpga-matmul.gen/sources_1/bd/top/ipshared/20d0/hdl/verilog" --include "../../../../uu-fpga-matmul.gen/sources_1/bd/top/ipshared/aed8/hdl" \
+"../../../bd/top/ip/top_smartconnect_0_2/bd_0/ip/ip_2/sim/bd_6d47_s00mmu_0.sv" \
+"../../../bd/top/ip/top_smartconnect_0_2/bd_0/ip/ip_3/sim/bd_6d47_s00tr_0.sv" \
+"../../../bd/top/ip/top_smartconnect_0_2/bd_0/ip/ip_4/sim/bd_6d47_s00sic_0.sv" \
+"../../../bd/top/ip/top_smartconnect_0_2/bd_0/ip/ip_5/sim/bd_6d47_s00a2s_0.sv" \
+"../../../bd/top/ip/top_smartconnect_0_2/bd_0/ip/ip_6/sim/bd_6d47_sarn_0.sv" \
+"../../../bd/top/ip/top_smartconnect_0_2/bd_0/ip/ip_7/sim/bd_6d47_srn_0.sv" \
+"../../../bd/top/ip/top_smartconnect_0_2/bd_0/ip/ip_8/sim/bd_6d47_sawn_0.sv" \
+"../../../bd/top/ip/top_smartconnect_0_2/bd_0/ip/ip_9/sim/bd_6d47_swn_0.sv" \
+"../../../bd/top/ip/top_smartconnect_0_2/bd_0/ip/ip_10/sim/bd_6d47_sbn_0.sv" \
+"../../../bd/top/ip/top_smartconnect_0_2/bd_0/ip/ip_11/sim/bd_6d47_m00s2a_0.sv" \
+"../../../bd/top/ip/top_smartconnect_0_2/bd_0/ip/ip_12/sim/bd_6d47_m00e_0.sv" \
+
+verilog xil_defaultlib --include "/tools/Xilinx/Vivado/2023.1/data/xilinx_vip/include" --include "../../../../uu-fpga-matmul.gen/sources_1/bd/top/ipshared/f0b6/hdl/verilog" --include "../../../../uu-fpga-matmul.gen/sources_1/bd/top/ipshared/66be/hdl/verilog" --include "../../../../uu-fpga-matmul.gen/sources_1/bd/top/ipshared/ec67/hdl" --include "../../../../uu-fpga-matmul.gen/sources_1/bd/top/ipshared/1b7e/hdl/verilog" --include "../../../../uu-fpga-matmul.gen/sources_1/bd/top/ipshared/122e/hdl/verilog" --include "../../../../uu-fpga-matmul.gen/sources_1/bd/top/ipshared/affe/hdl/verilog" --include "../../../../uu-fpga-matmul.gen/sources_1/bd/top/ipshared/20d0/hdl/verilog" --include "../../../../uu-fpga-matmul.gen/sources_1/bd/top/ipshared/aed8/hdl" \
+"../../../bd/top/ip/top_smartconnect_0_2/bd_0/sim/bd_6d47.v" \
+"../../../bd/top/ip/top_smartconnect_0_2/sim/top_smartconnect_0_2.v" \
+"../../../bd/top/ip/top_system_ila_0_0/bd_0/ip/ip_0/sim/bd_0696_ila_lib_0.v" \
+"../../../bd/top/ip/top_system_ila_0_0/bd_0/ip/ip_1/bd_0696_g_inst_0_gigantic_mux.v" \
+"../../../bd/top/ip/top_system_ila_0_0/bd_0/ip/ip_1/sim/bd_0696_g_inst_0.v" \
+"../../../bd/top/ip/top_system_ila_0_0/bd_0/sim/bd_0696.v" \
+"../../../bd/top/ip/top_system_ila_0_0/sim/top_system_ila_0_0.v" \
+"../../../bd/top/ip/top_xlconcat_0_0/sim/top_xlconcat_0_0.v" \
+"../../../bd/top/ip/top_processing_system7_0_1/sim/top_processing_system7_0_1.v" \
+"../../../bd/top/sim/top.v" \
+
+verilog xil_defaultlib "glbl.v"
+
+# Do not sort compile order
+nosort

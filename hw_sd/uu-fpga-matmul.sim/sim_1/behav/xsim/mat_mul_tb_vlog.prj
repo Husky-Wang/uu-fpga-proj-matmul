@@ -1,0 +1,13 @@
+# compile verilog/system verilog design source files
+verilog xil_defaultlib  --include "../../../../uu-fpga-matmul.gen/sources_1/bd/top/ipshared/ec67/hdl" --include "../../../../uu-fpga-matmul.gen/sources_1/bd/top/ipshared/aed8/hdl" --include "../../../../uu-fpga-matmul.gen/sources_1/bd/top/ipshared/f0b6/hdl/verilog" --include "../../../../uu-fpga-matmul.gen/sources_1/bd/top/ipshared/66be/hdl/verilog" --include "/tools/Xilinx/Vivado/2023.1/data/xilinx_vip/include" \
+"../../../../uu-fpga-matmul.srcs/sources_1/new/mat_mul_accel.v" \
+"../../../../uu-fpga-matmul.srcs/sources_1/new/mat_mul_core.v" \
+
+sv xil_defaultlib  --include "../../../../uu-fpga-matmul.gen/sources_1/bd/top/ipshared/ec67/hdl" --include "../../../../uu-fpga-matmul.gen/sources_1/bd/top/ipshared/aed8/hdl" --include "../../../../uu-fpga-matmul.gen/sources_1/bd/top/ipshared/f0b6/hdl/verilog" --include "../../../../uu-fpga-matmul.gen/sources_1/bd/top/ipshared/66be/hdl/verilog" --include "/tools/Xilinx/Vivado/2023.1/data/xilinx_vip/include" \
+"../../../../uu-fpga-matmul.srcs/sim_1/new/mat_mul_tb.sv" \
+
+# compile glbl module
+verilog xil_defaultlib "glbl.v"
+
+# Do not sort compile order
+nosort
